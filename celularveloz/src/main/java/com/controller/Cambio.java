@@ -19,7 +19,7 @@ public class Cambio extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    
+      int mensaje;
         try
         {
         UsuarioDAO usuario = new UsuarioDAO();
@@ -30,17 +30,23 @@ public class Cambio extends HttpServlet {
         String rol= request.getParameter("rolC");
         
         boolean veri = usuario.update(new Usuario(login, password, nombre, apellido, rol));
-            if (veri) {
-                request.getRequestDispatcher("usuariocon.jsp").forward(request, response);
+            if (veri) 
+            {
+                mensaje= 6;
+                request.setAttribute("mensaje", mensaje);
+                request.getRequestDispatcher("usuarios.jsp").forward(request, response);
             }
             else {
-                request.getRequestDispatcher("usuariosin.jsp").forward(request, response);
+                mensaje=5;
+                request.setAttribute("mensaje", mensaje);
+                request.getRequestDispatcher("usuarios.jsp").forward(request, response);
             }
             
             
         }catch(Exception e)
         {
-            request.getRequestDispatcher("usuariosin.jsp").forward(request, response);
+            mensaje= 3;
+            request.getRequestDispatcher("usuarios.jsp").forward(request, response);
         }
         
         

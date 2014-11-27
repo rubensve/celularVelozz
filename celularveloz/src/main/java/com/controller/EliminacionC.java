@@ -32,7 +32,7 @@ public class EliminacionC extends HttpServlet {
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    
+       int mensajes;
         try {
             int id = Integer.parseInt(request.getParameter("idA"));
             ClienteDAO cliente = new ClienteDAO();
@@ -40,13 +40,19 @@ public class EliminacionC extends HttpServlet {
             
             if (rev) 
             {
-            request.getRequestDispatcher("clientecon.jsp").forward(request, response);
+                mensajes=3;
+                request.setAttribute("mensajes", mensajes);
+            request.getRequestDispatcher("clientes.jsp").forward(request, response);
             }
             else {
-                request.getRequestDispatcher("clientesin.jsp").forward(request, response);
+                mensajes=4;
+                 request.setAttribute("mensajes", mensajes);
+                request.getRequestDispatcher("clientes.jsp").forward(request, response);
             }
         } catch (Exception e) {
-                            request.getRequestDispatcher("clientesin.jsp").forward(request, response);
+            mensajes=2;
+             request.setAttribute("mensajes", mensajes);
+             request.getRequestDispatcher("clientes.jsp").forward(request, response);
 
         }
     

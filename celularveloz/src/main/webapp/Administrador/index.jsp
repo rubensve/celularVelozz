@@ -81,9 +81,7 @@
 
     </div>
     <!-- /#wrapper -->
-        
-        
-                    
+           
     <script src="../js/libs/jquery/jquery.js"></script>               
     <script src="../js/libs/bootstrap/js/bootstrap.min.js"></script>
     </body>

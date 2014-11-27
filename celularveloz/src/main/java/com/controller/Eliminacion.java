@@ -23,19 +23,26 @@ public class Eliminacion extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int mensaje;
         try {
             String login = request.getParameter("loginB");
             UsuarioDAO usuario = new UsuarioDAO();
             boolean verificar= usuario.delete(login);
             if (verificar) 
             {
-             request.getRequestDispatcher("usuariocon.jsp").forward(request, response);
+                mensaje=4;
+                request.setAttribute("mensaje", mensaje);
+             request.getRequestDispatcher("usuarios.jsp").forward(request, response);
             }
             else {
-                request.getRequestDispatcher("usuariosin.jsp").forward(request, response);
+                mensaje=5;
+                request.setAttribute("mensaje", mensaje);
+                request.getRequestDispatcher("usuarios.jsp").forward(request, response);
             }
         } catch (Exception e) {
-           request.getRequestDispatcher("usuariosin.jsp").forward(request, response);
+            mensaje=3;
+            request.setAttribute("mensaje", mensaje);
+           request.getRequestDispatcher("usuarios.jsp").forward(request, response);
 
         }
        

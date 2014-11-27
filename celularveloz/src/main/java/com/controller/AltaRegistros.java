@@ -8,12 +8,12 @@ package com.controller;
 import com.dao.UsuarioDAO;
 import com.pojo.Usuario;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -23,7 +23,10 @@ import javax.servlet.http.HttpServletResponse;
 public class AltaRegistros extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {    
+            throws ServletException, IOException {  
+        int mensaje;
+        HttpSession session = request.getSession(true);
+        
         try {
                 String login = request.getParameter("loginA");
                 String password = request.getParameter("passwordA");
@@ -37,15 +40,21 @@ public class AltaRegistros extends HttpServlet {
           
                   if (probar) 
                  {
-                  request.getRequestDispatcher("usuariocon.jsp").forward(request, response);  
+                     mensaje=1;
+                    request.setAttribute("mensaje", mensaje);
+                  request.getRequestDispatcher("usuarios.jsp").forward(request, response);
                  }
                   else {
-                request.getRequestDispatcher("usuariosin.jsp").forward(request, response);
+                      mensaje=2;
+                      request.setAttribute("mensaje", mensaje);
+                request.getRequestDispatcher("usuarios.jsp").forward(request, response);
                  }
             
                 } catch (Exception e) 
                 {
-                 request.getRequestDispatcher("usuariosin.jsp").forward(request, response);
+                    mensaje=3;
+                    request.setAttribute("mensaje", mensaje);
+                 request.getRequestDispatcher("usuarios.jsp").forward(request, response);
                 }
     }
 }

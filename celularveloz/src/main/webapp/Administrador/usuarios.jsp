@@ -24,6 +24,28 @@
         <title>Usuarios de Sistema</title>
     </head>
     <body>
+       <input type="text" name="alerta" id="alerta" value="${requestScope.mensaje}" hidden> 
+        <script>
+            var mensaje= document.getElementById("alerta").value;
+            if (mensaje==1) 
+            {
+                alert("Usuario Registrado Correctamente");
+            }
+            else if (mensaje==2) 
+            {
+                 alert("El nombre de usuario ya existe, intente nuevamente");   
+            }
+            else if(mensaje==3){
+                alert("No se ha podido completar la solicitud, intente nuevamente");
+            }else if(mensaje==4){
+                alert("Usuario Eliminado Correctamente");
+            }else if(mensaje==5){
+                alert("El Usuario no existe, intente nuevamente");
+            }else if(mensaje==6){
+                alert("Usuario Modificado Correctamente");
+            }
+            
+        </script>
         
         <div id="wrapper">
 
@@ -116,26 +138,26 @@
                                         <div class="form-group">
                                           <label>Login</label>
                                           <input type="text" class="form-control" name="loginA"
-                                                 placeholder="Introduce el nombre de Usuario">
+                                                 placeholder="Introduce el nombre de Usuario" required>
                                         </div>
                                         <div class="form-group">
                                           <label>Contraseña</label>
                                           <input type="password" class="form-control" name="passwordA" 
-                                                 placeholder="Contraseña">
+                                                 placeholder="Contraseña" required>
                                         </div>
                                         <div class="form-group">
                                           <label>Nombre</label>
                                           <input type="text" class="form-control" name="nombreA" 
-                                                 placeholder="Nombre">
+                                                 placeholder="Nombre" required>
                                         </div>
                                         <div class="form-group">
                                           <label>Apellido</label>
                                           <input type="text" class="form-control" name="apellidoA" 
-                                                 placeholder="Apellido">
+                                                 placeholder="Apellido" required>
                                         </div>
                                       <div class="form-group">
                                         <label>Rol</label>
-                                        <select class="form-control" name="rolA">
+                                        <select class="form-control" name="rolA" required>
                                         <option>Administrador</option>
                                         <option>Cajero</option>
                                         </select>
@@ -167,7 +189,7 @@
                                         <div class="form-group">
                                           <label>Login</label>
                                           <input type="text" class="form-control" name="loginB"
-                                                 placeholder="Introduce el nombre de Usuario">
+                                                 placeholder="Introduce el nombre de Usuario" required>
                                         </div>
                                         <p class="help-block">Escribe el Login del Usuario a eliminar.</p>
                                         <button type="submit" class="btn btn-warning">Eliminar</button>
@@ -200,22 +222,22 @@
                                             <p class="help-block">Introduce el Login del Usuario a Modificar.</p>
                                           <label>Login</label>
                                           <input type="text" class="form-control" name="loginC"
-                                                 placeholder="Introduce el nombre de Usuario">
+                                                 placeholder="Introduce el nombre de Usuario" required>
                                         </div>
                                         <div class="form-group">
                                           <label>Contraseña</label>
                                           <input type="password" class="form-control" name="passwordC" 
-                                                 placeholder="Contraseña">
+                                                 placeholder="Contraseña" required>
                                         </div>
                                         <div class="form-group">
                                           <label>Nombre</label>
                                           <input type="text" class="form-control" name="nombreC" 
-                                                 placeholder="Nombre">
+                                                 placeholder="Nombre" required>
                                         </div>
                                         <div class="form-group">
                                           <label>Apellido</label>
                                           <input type="text" class="form-control" name="apellidoC" 
-                                                 placeholder="Apellido">
+                                                 placeholder="Apellido" required>
                                         </div>
                                       <div class="form-group">
                                         <label>Rol</label>

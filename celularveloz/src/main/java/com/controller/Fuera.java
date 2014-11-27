@@ -23,7 +23,7 @@ public class Fuera extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        int mensajes;
         try {
             String nombre= request.getParameter("nomB");
             String apellido = request.getParameter("apeB");
@@ -36,13 +36,18 @@ public class Fuera extends HttpServlet {
             
             if (ver) 
             {
-             request.getRequestDispatcher("clientecon.jsp").forward(request, response);
+                mensajes= 5;
+                 request.setAttribute("mensajes", mensajes);
+             request.getRequestDispatcher("clientes.jsp").forward(request, response);
             }
             else {
-                request.getRequestDispatcher("clientesin.jsp").forward(request, response);
+                mensajes=4;
+                 request.setAttribute("mensajes", mensajes);
+                request.getRequestDispatcher("clientes.jsp").forward(request, response);
             }
         } catch (Exception e) {
-                request.getRequestDispatcher("clientesin.jsp").forward(request, response);
+            mensajes=2;
+                request.getRequestDispatcher("clientes.jsp").forward(request, response);
 
         }
     

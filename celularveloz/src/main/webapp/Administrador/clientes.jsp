@@ -24,6 +24,28 @@
         <title>Clientes</title>
     </head>
     <body>
+        
+        <input type="text" name="alerta" id="alert" value="${requestScope.mensajes}" hidden />
+        
+        <script>
+            var mensaje= document.getElementById("alert").value;
+            if (mensaje==1) 
+            {
+                alert("Cliente Registrado Correctamente");
+            }
+            else if(mensaje==2){
+                alert("No se ha podido completar la solicitud, intente nuevamente");
+            }else if(mensaje==3){
+                alert("Cliente Eliminado Correctamente");
+            }else if(mensaje==4){
+                alert("El Clliente no existe, intente nuevamente");
+            }else if(mensaje==5){
+                alert("Cliente Modificado Correctamente");
+            }
+            
+        </script>
+        
+        
         <div id="wrapper">
 
         <!-- Sidebar -->
@@ -114,22 +136,22 @@
                                                 <div class="form-group">
                                                   <label>Nombre</label>
                                                   <input type="text" class="form-control" name="nomA"
-                                                         placeholder="Nombre de Cliente">
+                                                         placeholder="Nombre de Cliente" required>
                                                 </div>
                                                 <div class="form-group">
                                                   <label>Apellido</label>
                                                   <input type="text" class="form-control" name="apeA" 
-                                                         placeholder="Apellido">
+                                                         placeholder="Apellido" required>
                                                 </div>
                                                 <div class="form-group">
                                                   <label>Dirección</label>
                                                   <input type="text" class="form-control" name="dirA" 
-                                                         placeholder="Dirección">
+                                                         placeholder="Dirección" required>
                                                 </div>
                                                 <div class="form-group">
                                                   <label>Telefono</label>
                                                   <input type="tel" class="form-control" name="telA" 
-                                                         placeholder="Telefono">
+                                                         placeholder="Telefono" required>
                                                 </div>
                                               
                                                 <button type="submit" class="btn btn-success">Registrar</button>
@@ -159,7 +181,7 @@
                                                 <div class="form-group">
                                                   <label>Id Cliente</label>
                                                   <input type="text" class="form-control" name="idA"
-                                                         placeholder="Introduce el Id de Cliente">
+                                                         placeholder="Introduce el Id de Cliente" required>
                                                 </div>
                                                 <p class="help-block">Puedes revisar el id cliente en el apartado
                                                 Consultas de esta misma aplicación</p>
@@ -193,30 +215,30 @@
                                                     <p class="help-block">Introduce el ID del Cliente a Modificar.</p>
                                                   <label>ID Cliente</label>
                                                   <input type="text" class="form-control" name="idB"
-                                                         placeholder="Introduce el ID del Cliente">
+                                                         placeholder="Introduce el ID del Cliente" required>
                                                 </div>
                                                 <div class="form-group">
                                                   <label>Nombre</label>
                                                   <input type="text" class="form-control" name="nomB" 
-                                                         placeholder="Nombre del Cliente">
+                                                         placeholder="Nombre del Cliente" required>
                                                 </div>
                                                 
                                                 <div class="form-group">
                                                   <label>Apellido</label>
                                                   <input type="text" class="form-control" name="apeB" 
-                                                         placeholder="Apellido">
+                                                         placeholder="Apellido" required>
                                                 </div>
                                               
                                               <div class="form-group">
                                                   <label>Dirección</label>
                                                   <input type="text" class="form-control" name="dirB" 
-                                                         placeholder="Nombre del Cliente">
+                                                         placeholder="Nombre del Cliente" required>
                                                 </div>
                                                 
                                                 <div class="form-group">
                                                   <label>Telefono</label>
                                                   <input type="text" class="form-control" name="telB" 
-                                                         placeholder="Apellido">
+                                                         placeholder="Apellido" required>
                                                 </div>
                                                
                                                 <button type="submit" class="btn btn-info">Modificar</button>
@@ -228,10 +250,6 @@
                                 </div>
                             </div>
                         </div>
-
-
-
-
                     </div>
                 </div>    
 

@@ -19,7 +19,7 @@ public class Clientitos extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        int mensajes;
         try {
             String nombre= request.getParameter("nomA");
             String apellido = request.getParameter("apeA");
@@ -29,14 +29,18 @@ public class Clientitos extends HttpServlet {
             boolean rev= cliente.create(new Cliente(nombre, apellido, direccion, telefono));
             if (rev) 
             {
-             request.getRequestDispatcher("clientecon.jsp").forward(request, response);
+                mensajes=1;
+                request.setAttribute("mensajes", mensajes);
+             request.getRequestDispatcher("clientes.jsp").forward(request, response);
             }
             else {
-                request.getRequestDispatcher("clientesin.jsp").forward(request, response);
+                mensajes= 2;
+                request.getRequestDispatcher("clientes.jsp").forward(request, response);
             }
         } catch (Exception e)
         {
-            request.getRequestDispatcher("clientesin.jsp").forward(request, response);
+            mensajes =2;
+            request.getRequestDispatcher("clientes.jsp").forward(request, response);
         }
     }
 }
