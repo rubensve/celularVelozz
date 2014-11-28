@@ -22,7 +22,8 @@ public class NotaDAO implements DAO <Nota>{
     private static final String SQL_READULTIMOF = "Select * from notas order by folio desc limit 1" ;
     private static final String SQL_READ= "select * from notas where folio= ?";
     private static final String SQL_READALL= "select * from notas";
-    private static final String SQL_UPDATE= "update notas set id_cliente=?, descripcion=?, estado=? , costo=? where folio=?";
+    private static final String SQL_UPDATE= "update notas set estatusnota=?, estatusreparacion=?"
+            + " where folio=?";
     private static final String SQL_DELETE= "delete from notas where folio=?";
 
     
@@ -79,16 +80,14 @@ public class NotaDAO implements DAO <Nota>{
     @Override
     public boolean update(Nota n) 
     {
-      /*   PreparedStatement ps;
+        PreparedStatement ps;
         try {
            
             ps =conexion.getCc().prepareStatement(SQL_UPDATE);
             
-            ps.setInt(1, n.getE().getId());
-            ps.setString(2, n.getDescripcion());
-            ps.setString(3, n.getEstado());
-            ps.setDouble(4, n.getCosto());
-            ps.setInt(5, n.getFolio());
+            ps.setString(1, n.getEstatusNota());
+            ps.setString(2, n.getEstatusReparacion());
+            ps.setInt(3, n.getFolio());
             
             if (ps.executeUpdate()>0)
             {    
@@ -98,7 +97,7 @@ public class NotaDAO implements DAO <Nota>{
             Logger.getLogger(NotaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             conexion.cerrarConexion();
-        }*/
+        }
         return false;
     }
 

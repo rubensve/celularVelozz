@@ -21,21 +21,13 @@
     response.addHeader("Cache-Control", "no-cache");
     response.addHeader("Cache-Control", "no-store");
     response.setDateHeader("Expires", 0);
-   
-    ArrayList<Cliente> clientes = new ArrayList();
-    
     String fecha = (String)session.getAttribute("fechaentrega");
+    NotaDAO notas= new NotaDAO();
+    Nota nota= notas.readUltimo();
     
     if ( (fecha == null) || (fecha.equals("")) ) {
-      fecha = "11-07-1989";
+      fecha = "";
      }
-    
-    ClienteDAO cli = new ClienteDAO();
-    clientes = cli.readAll();
-    NotaDAO notas = new NotaDAO();
-    Nota nota = notas.readUltimo();
-    session.setAttribute("nota", nota);
-    request.setAttribute("clientes", clientes);
     %>
 <html>
     <head>
@@ -66,7 +58,7 @@
                     <a href="clientes.jsp">Clientes</a>
                 </li>
                 <li>
-                    <a href="ventas.jsp">Ventas</a>
+                    <a href="notas.jsp">Ventas</a>
                 </li>
                 <li>
                     <a href="busquedas.jsp">Consultas</a>
@@ -98,7 +90,7 @@
                                         <label>Folio</label>
                                         <div class="col-md-11">
                                         <input type="text" class="form-control" 
-                                               placeholder="Folio Nota" name="folio" value="<%= nota.getFolio() + 1 %>" readonly="true">
+                                               placeholder="Folio Nota" name="folio" value="<%= nota.getFolio()+1 %>" readonly="true">
                                         </div>
                                         </div>
                                     </div>

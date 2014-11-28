@@ -43,7 +43,7 @@
                     <a href="clientes.jsp">Clientes</a>
                 </li>
                 <li>
-                    <a href="ventas.jsp">Ventas</a>
+                    <a href="notas.jsp">Ventas</a>
                 </li>
                 <li>
                     <a href="busquedas.jsp">Consultas</a>

@@ -18,7 +18,6 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -55,11 +54,9 @@ public class Registreishon extends HttpServlet {
         sesion.setAttribute("usuario", u);
         ArrayList<Articulo> articulos;
         NotaDAO nota = new NotaDAO();
-        Nota notas = (Nota) sesion.getAttribute("nota");
         ArticuloDAO articulo = new ArticuloDAO();
         ClienteDAO cliente = new ClienteDAO();
         
-        sesion.setAttribute("notas", notas);
         
         if (sesion.getAttribute("articulos")==null) 
                 {
@@ -117,10 +114,13 @@ public class Registreishon extends HttpServlet {
                 
                     articulos.clear();
                     sesion.removeAttribute(imei);
-                    sesion.removeAttribute(fechaentrega);        
+                    sesion.removeAttribute(fechaentrega);  
+                    
+            
             }
             else if (request.getParameter("Imprimir")!=null) 
             {
+                Nota notas= nota.readUltimo();
                 int id_cliente = notas.getId_usuario();
                 Cliente c = cliente.readi(id_cliente);
                 ArrayList<Articulo> compras = articulo.read(notas.getFolio());

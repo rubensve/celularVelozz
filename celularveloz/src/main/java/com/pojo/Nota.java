@@ -54,6 +54,13 @@ public class Nota {
         this.resta = resta;
     }
 
+    public Nota(int folio, String estatusNota, String estatusReparacion) {
+        this.folio = folio;
+        this.estatusNota = estatusNota;
+        this.estatusReparacion = estatusReparacion;
+    }
+
+    
     public int getFolio() {
         return folio;
     }
