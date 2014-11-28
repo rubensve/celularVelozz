@@ -23,24 +23,24 @@ public class Eliminacion extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int mensaje;
+        String mensaje;
         try {
             String login = request.getParameter("loginB");
             UsuarioDAO usuario = new UsuarioDAO();
             boolean verificar= usuario.delete(login);
             if (verificar) 
             {
-                mensaje=4;
+                mensaje= "Usuario eliminado Correctamente";
                 request.setAttribute("mensaje", mensaje);
              request.getRequestDispatcher("usuarios.jsp").forward(request, response);
             }
             else {
-                mensaje=5;
+                mensaje= "Nombre de Usuario no existe, intente nuevamente";
                 request.setAttribute("mensaje", mensaje);
                 request.getRequestDispatcher("usuarios.jsp").forward(request, response);
             }
         } catch (Exception e) {
-            mensaje=3;
+            mensaje= "Ha surgido un error al procesar su solicitud, intente nuevamente";
             request.setAttribute("mensaje", mensaje);
            request.getRequestDispatcher("usuarios.jsp").forward(request, response);
 

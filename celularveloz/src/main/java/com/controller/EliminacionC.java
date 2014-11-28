@@ -21,18 +21,9 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "Eliminaciones", urlPatterns = {"/Administrador/eliminarc.los"})
 public class EliminacionC extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       int mensajes;
+       String mensajes;
         try {
             int id = Integer.parseInt(request.getParameter("idA"));
             ClienteDAO cliente = new ClienteDAO();
@@ -40,17 +31,17 @@ public class EliminacionC extends HttpServlet {
             
             if (rev) 
             {
-                mensajes=3;
+                mensajes="Cliente Eliminado Correctamente";
                 request.setAttribute("mensajes", mensajes);
             request.getRequestDispatcher("clientes.jsp").forward(request, response);
             }
             else {
-                mensajes=4;
+                mensajes="El id de cliente no existe, intente nuevamente";
                  request.setAttribute("mensajes", mensajes);
                 request.getRequestDispatcher("clientes.jsp").forward(request, response);
             }
         } catch (Exception e) {
-            mensajes=2;
+            mensajes="Se ha producido un error al procesar su solicitud, intente nuevamente";
              request.setAttribute("mensajes", mensajes);
              request.getRequestDispatcher("clientes.jsp").forward(request, response);
 

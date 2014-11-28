@@ -29,20 +29,14 @@
         
         <script>
             var mensaje= document.getElementById("alert").value;
-            if (mensaje==1) 
+            if (mensaje==null || mensaje=="") 
             {
-                alert("Cliente Registrado Correctamente");
+                
             }
-            else if(mensaje==2){
-                alert("No se ha podido completar la solicitud, intente nuevamente");
-            }else if(mensaje==3){
-                alert("Cliente Eliminado Correctamente");
-            }else if(mensaje==4){
-                alert("El Clliente no existe, intente nuevamente");
-            }else if(mensaje==5){
-                alert("Cliente Modificado Correctamente");
+            else 
+            {
+                alert(mensaje);
             }
-            
         </script>
         
         

@@ -19,7 +19,7 @@ public class Cambio extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      int mensaje;
+      String mensaje;
         try
         {
         UsuarioDAO usuario = new UsuarioDAO();
@@ -32,12 +32,12 @@ public class Cambio extends HttpServlet {
         boolean veri = usuario.update(new Usuario(login, password, nombre, apellido, rol));
             if (veri) 
             {
-                mensaje= 6;
+                mensaje= "Usuario actualizado correctamente";
                 request.setAttribute("mensaje", mensaje);
                 request.getRequestDispatcher("usuarios.jsp").forward(request, response);
             }
             else {
-                mensaje=5;
+                mensaje= "El Nombre de usuario no existe, intente nuevamente";
                 request.setAttribute("mensaje", mensaje);
                 request.getRequestDispatcher("usuarios.jsp").forward(request, response);
             }
@@ -45,7 +45,7 @@ public class Cambio extends HttpServlet {
             
         }catch(Exception e)
         {
-            mensaje= 3;
+            mensaje= "Ha surgido un error al procesar su solicitud, intente nuevamente";
             request.getRequestDispatcher("usuarios.jsp").forward(request, response);
         }
         

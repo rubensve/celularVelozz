@@ -27,24 +27,14 @@
        <input type="text" name="alerta" id="alerta" value="${requestScope.mensaje}" hidden> 
         <script>
             var mensaje= document.getElementById("alerta").value;
-            if (mensaje==1) 
+            if (mensaje==null || mensaje=="") 
             {
-                alert("Usuario Registrado Correctamente");
+                
             }
-            else if (mensaje==2) 
-            {
-                 alert("El nombre de usuario ya existe, intente nuevamente");   
+            else{
+                alert(mensaje);
             }
-            else if(mensaje==3){
-                alert("No se ha podido completar la solicitud, intente nuevamente");
-            }else if(mensaje==4){
-                alert("Usuario Eliminado Correctamente");
-            }else if(mensaje==5){
-                alert("El Usuario no existe, intente nuevamente");
-            }else if(mensaje==6){
-                alert("Usuario Modificado Correctamente");
-            }
-            
+           
         </script>
         
         <div id="wrapper">

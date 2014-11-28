@@ -23,7 +23,7 @@ public class Fuera extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int mensajes;
+        String mensajes;
         try {
             String nombre= request.getParameter("nomB");
             String apellido = request.getParameter("apeB");
@@ -36,17 +36,18 @@ public class Fuera extends HttpServlet {
             
             if (ver) 
             {
-                mensajes= 5;
+                mensajes= "Cliente actualizado Correctamente";
                  request.setAttribute("mensajes", mensajes);
              request.getRequestDispatcher("clientes.jsp").forward(request, response);
             }
             else {
-                mensajes=4;
+                mensajes="El id de Cliente no existe, intente nuevamente";
                  request.setAttribute("mensajes", mensajes);
                 request.getRequestDispatcher("clientes.jsp").forward(request, response);
             }
         } catch (Exception e) {
-            mensajes=2;
+            mensajes="Se ha producido un error al procesar su solicitud, intente nuevamente";
+            request.setAttribute("mensajes", mensajes);
                 request.getRequestDispatcher("clientes.jsp").forward(request, response);
 
         }

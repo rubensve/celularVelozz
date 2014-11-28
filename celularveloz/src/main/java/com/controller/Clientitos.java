@@ -19,7 +19,7 @@ public class Clientitos extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int mensajes;
+        String mensajes;
         try {
             String nombre= request.getParameter("nomA");
             String apellido = request.getParameter("apeA");
@@ -29,17 +29,19 @@ public class Clientitos extends HttpServlet {
             boolean rev= cliente.create(new Cliente(nombre, apellido, direccion, telefono));
             if (rev) 
             {
-                mensajes=1;
+                mensajes="Cliente Registrado Correctamente";
                 request.setAttribute("mensajes", mensajes);
              request.getRequestDispatcher("clientes.jsp").forward(request, response);
             }
             else {
-                mensajes= 2;
+                mensajes= "No se ha podido registrar al cliente, intente nuevamente";
+                request.setAttribute("mensajes", mensajes);
                 request.getRequestDispatcher("clientes.jsp").forward(request, response);
             }
         } catch (Exception e)
         {
-            mensajes =2;
+            mensajes ="Se ha producido un error al procesar su solicitud, intente nuevamente";
+            request.setAttribute("mensajes", mensajes);
             request.getRequestDispatcher("clientes.jsp").forward(request, response);
         }
     }

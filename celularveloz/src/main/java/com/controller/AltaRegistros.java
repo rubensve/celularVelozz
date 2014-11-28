@@ -13,7 +13,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -24,8 +23,7 @@ public class AltaRegistros extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {  
-        int mensaje;
-        HttpSession session = request.getSession(true);
+        String mensaje;
         
         try {
                 String login = request.getParameter("loginA");
@@ -40,19 +38,19 @@ public class AltaRegistros extends HttpServlet {
           
                   if (probar) 
                  {
-                     mensaje=1;
+                    mensaje= "Usuario Registrado Correctamente";
                     request.setAttribute("mensaje", mensaje);
                   request.getRequestDispatcher("usuarios.jsp").forward(request, response);
                  }
                   else {
-                      mensaje=2;
+                      mensaje= "El nombre de Usuario ya extiste, intente nuevamente";
                       request.setAttribute("mensaje", mensaje);
                 request.getRequestDispatcher("usuarios.jsp").forward(request, response);
                  }
             
                 } catch (Exception e) 
                 {
-                    mensaje=3;
+                    mensaje= "Ha surgido un error al procesar su solicitud, intente nuevamente";
                     request.setAttribute("mensaje", mensaje);
                  request.getRequestDispatcher("usuarios.jsp").forward(request, response);
                 }
