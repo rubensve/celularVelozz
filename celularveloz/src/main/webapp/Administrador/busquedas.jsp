@@ -62,75 +62,123 @@
                 <div class="row">
                     <div class="col-lg-12">
                       
-                        <div class="container-fluid" id="busquedaUsuario">
-                            <h3>Busqueda Individual de Usuarios</h3>
-                            <form role="form"  action="usuario.usu" method="post">
-                                  <div class="form-group">
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                    <h3>Busqueda Individual de Usuarios</h3>
+                                    <div class="container-fluid" id="busquedaUsuario">
+                                    <form role="form"  action="usuario.usu" method="post">
+                                    <div class="form-group">
                                     <label>Login</label>
                                     <input type="text" class="form-control" name="busA"
-                                           placeholder="Introduce el login ">
-                                  </div>
+                                      placeholder="Introduce el login ">
+                                    </div>
                                     <p class="help-block">Busqueda de Usuarios por Login.</p>
-                                  <button type="submit" class="btn btn-lg btn-success">Buscar</button>
+                                    <button type="submit" class="btn btn-lg btn-success">Buscar</button>
+                                    </form>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="container-fluid" id="busquedaUsuarios">
+                                <h3>Mostrar todos los usuarios del Sistema</h3>
+                                <form role="form"  action="usuarios.usu" method="get">
+                                <p class="help-block">Mostrar todos los Usuarios</p>
+                                <button type="submit" class="btn btn-lg btn-info">Buscar</button>
                                 </form>
+                                </div>
+                            </div>
+                            
                         </div>
                         <hr>
                         
-                           <div class="container-fluid" id="busquedaUsuarios">
-                            <h3>Mostrar todos los usuarios del Sistema</h3>
-                            <form role="form"  action="usuarios.usu" method="get">
-                                    <p class="help-block">Mostrar todos los Usuarios</p>
-                                  <button type="submit" class="btn btn-lg btn-info">Buscar</button>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="container-fluid" id="busquedaCliente">
+                                <h3>Busqueda Individual de Clientes</h3>
+                                <form role="form"  action="cliente.cli" method="get">
+                                <div class="form-group">
+                                <label>Nombre</label>
+                                <input type="text" class="form-control" name="busB"
+                                placeholder="Introduce el Nombre ">
+                                </div>
+                                <p class="help-block">Busqueda de Cliente por Nombre.</p>
+                                <button type="submit" class="btn btn-lg btn-danger">Buscar</button>
                                 </form>
+                               </div>
+                            </div>
+                           
+                            <div class="col-md-6">
+                                <div class="container-fluid" id="busquedaClientes">
+                                <h3>Mostrar todos los Clientes del Sistema</h3>
+                                <form role="form"  action="clientes.cli" method="get">
+                                <p class="help-block">Mostrar todos los Usuarios</p>
+                                <button type="submit" class="btn btn-lg btn-warning">Buscar</button>
+                                </form>
+                                </div>
+                                </div>    
                         </div>
-                        
                         <hr>
-                        
-                        <div class="container-fluid" id="busquedaCliente">
-                            <h3>Busqueda Individual de Clientes</h3>
-                            <form role="form"  action="cliente.cli" method="get">
-                                  <div class="form-group">
-                                    <label>Nombre</label>
-                                    <input type="text" class="form-control" name="busB"
-                                           placeholder="Introduce el Nombre ">
+                       
+                        <div class="row">
+                            <div class="col-md-6">
+                                <form role="form"  action="nota.not" method="post">
+                                <div class="container-fluid" id="busquedaNota">
+                                <h3>Busqueda Individual de Notas</h3>
+                                <div class="form-group">
+                                        <label>Criterio de Busqueda</label>  
+                                        <select class="form-control" name="criterio">
+                                            <option>Folio</option>
+                                            <option>Nombre del Cliente</option>
+                                            <option>Fecha</option>
+                                        </select>
                                   </div>
-                                    <p class="help-block">Busqueda de Cliente por Nombre.</p>
-                                  <button type="submit" class="btn btn-lg btn-danger">Buscar</button>
+                                
+                                <div class="form-group">
+                                <label>Folio</label>
+                                <input type="text" class="form-control" name="folion"
+                                placeholder="Introduce el Folio">
+                                </div>
+                                    <hr>
+                                <p class="help-block">Busqueda de Nota por Folio.</p>
+                                <div class="form-group">
+                                <label>Nombre:</label>
+                                <input type="text" class="form-control" name="nombre"
+                                placeholder="Nombre Cliente">
+                                </div>
+                                <div class="form-group">
+                                <label>Apellido:</label>
+                                <input type="text" class="form-control" name="apellido"
+                                placeholder="Apellido Cliente">
+                                </div>
+                                <p class="help-block">Busqueda de Nota por Nombre.</p>
+                                <hr>
+                                <div class="form-group">
+                                <label>Fecha Inicial</label>
+                                <input type="text" class="form-control" name="inicial"
+                                placeholder="dddd-mm-aaaa">
+                                </div>
+                                <div class="form-group">
+                                <label>Fecha Final:</label>
+                                <input type="text" class="form-control" name="final"
+                                placeholder="dddd-mm-aaaa">
+                                </div>
+                                <p class="help-block">Busqueda de Nota por Fecha.</p>
+                                <button type="submit" class="btn btn-lg btn-success">Buscar</button>
+                                </div>
+                                 </form>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="container-fluid" id="busquedaNotas">
+                                <h3>Mostrar todos las Notas del Sistema</h3>
+                                <form role="form"  action="notas.not" method="get">
+                                <p class="help-block">Mostrar todos los Usuarios</p>
+                                <button type="submit" class="btn btn-lg btn-info">Buscar</button>
                                 </form>
+                                </div>
+                            </div>    
                         </div>
-                        
-                        <hr>
-                        <div class="container-fluid" id="busquedaClientes">
-                            <h3>Mostrar todos los Clientes del Sistema</h3>
-                            <form role="form"  action="clientes.cli" method="get">
-                                    <p class="help-block">Mostrar todos los Usuarios</p>
-                                  <button type="submit" class="btn btn-lg btn-warning">Buscar</button>
-                                </form>
-                        </div>
-                        <hr>
-                        
-                        <div class="container-fluid" id="busquedaNota">
-                            <h3>Busqueda Individual de Notas</h3>
-                            <form role="form"  action="nota.not" method="get">
-                                  <div class="form-group">
-                                    <label>Folio</label>
-                                    <input type="text" class="form-control" id="busC"
-                                           placeholder="Introduce el Folio">
-                                  </div>
-                                    <p class="help-block">Busqueda de Nota por Folio.</p>
-                                  <button type="submit" class="btn btn-lg btn-success">Buscar</button>
-                                </form>
-                        </div>
-                        <hr>
-                        
-                           <div class="container-fluid" id="busquedaNotas">
-                            <h3>Mostrar todos las Notas del Sistema</h3>
-                            <form role="form"  action="notas.not" method="get">
-                                    <p class="help-block">Mostrar todos los Usuarios</p>
-                                  <button type="submit" class="btn btn-lg btn-info">Buscar</button>
-                                </form>
-                        </div>
-
                     </div>
                 </div>
             </div>

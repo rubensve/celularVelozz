@@ -5,17 +5,16 @@
  */
 package com.controller;
 
-
 import com.dao.ArticuloDAO;
 import com.dao.ClienteDAO;
 import com.dao.NotaDAO;
+import com.dao.UsuarioDAO;
 import com.itextpdf.text.Chunk;
 import static com.itextpdf.text.Chunk.NEWLINE;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
-import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Rectangle;
@@ -34,136 +33,40 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author rubens
  */
-@WebServlet(name = "Registrar", urlPatterns = {"/Administrador/registro.pdf"})
-public class Registreishon extends HttpServlet {
+@WebServlet(name = "Reimprimision", urlPatterns = {"/Administrador/reimpr.pdf"})
+public class Imprimision extends HttpServlet {
 
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        double total = 0.0;
-        String imei;
-        String fechaentrega;
-        String modelo;
-        String observacion;
-        String mensaje;
-        int validar;
-        HttpSession sesion = request.getSession();
-        Usuario u = (Usuario) sesion.getAttribute("usuario");
-        sesion.setAttribute("usuario", u);
-        ArrayList<Articulo> articulos;
-        NotaDAO nota = new NotaDAO();
-        ArticuloDAO articulo = new ArticuloDAO();
-        ClienteDAO cliente = new ClienteDAO();
-        
-        
-        if (sesion.getAttribute("articulos")==null) 
-                {
-                 articulos = new ArrayList();
-                  
-                }
-                else{
-                articulos= (ArrayList<Articulo>) sesion.getAttribute("articulos");
-                }
+       
+        String mensaj;
+        try{
+       int folion= Integer.parseInt(request.getParameter("folion"));
+      
+       NotaDAO nota= new NotaDAO();
+       Nota notas= nota.readi(folion);
+       
+       int id_cliente = notas.getId_usuario();
+       ClienteDAO cliente= new ClienteDAO();
+       Cliente c = cliente.readi(id_cliente);
+       ArticuloDAO articulo= new ArticuloDAO();
+       ArrayList<Articulo> compras = articulo.read(notas.getFolio());
+       UsuarioDAO usuario= new UsuarioDAO();
+       Usuario u= usuario.login(notas.getLogin());
 
-        try
-        {
-            if (request.getParameter("Agregar")!=null)
-            {
-                int folio = Integer.parseInt(request.getParameter("folio"));
-                int cantidad= Integer.parseInt(request.getParameter("cantid"));
-                String descripcion = request.getParameter("descrip");
-                double precio = Double.parseDouble(request.getParameter("prec"));
-                imei = request.getParameter("imei");
-                fechaentrega = request.getParameter("fechaentrega");
-                int id_cliente= Integer.parseInt(request.getParameter("clientestodos"));
-                modelo= request.getParameter("modelo");
-                observacion= request.getParameter("observacioni");
-                Cliente cl= cliente.readi(id_cliente);
-                sesion.setAttribute("imei", imei);
-                sesion.setAttribute("fechaentrega", fechaentrega);
-                sesion.setAttribute("modelo", modelo);
-                sesion.setAttribute("observacion", observacion);
-                sesion.setAttribute("cl", cl);
-                if (cantidad>0 || (descripcion !=null || descripcion.equals("")) || precio>0)
-                {
-                articulos.add(new Articulo(new Nota(folio),cantidad, descripcion, precio)); 
-                sesion.setAttribute("articulos", articulos);
-                }
-                
-                
-            }
-            else if(request.getParameter("eliminar")!=null)
-            {
-                if (articulos.size()>0) 
-                {
-                 int ultimo = articulos.size() -1;
-                 articulos.remove(ultimo);
-                }
-                    
-            } else if (request.getParameter("Finalizar")!=null)
-            {
-               int folio = Integer.parseInt(request.getParameter("folio"));
-               String fecharecepcion = request.getParameter("fecha");
-               fechaentrega = request.getParameter("fechaentrega");
-               String login = u.getLogin();
-               int id_cliente = Integer.parseInt(request.getParameter("clientestodos"));
-               imei = request.getParameter("imei");
-               modelo= request.getParameter("modelo");
-               observacion= request.getParameter("observacioni");
-               double anticipo = Double.parseDouble(request.getParameter("anticipo"));
-               double totalv= Double.parseDouble(request.getParameter("total"));               
-               validar=1;
-               
-                if (observacion.equals("") || observacion==null) 
-                {
-                    observacion="Sin observaciones";
-                }
-                
-               
-               nota.create(new Nota(folio, fecharecepcion, fechaentrega, new Usuario(login), new Cliente(id_cliente), imei, 
-                       totalv, anticipo, (totalv-anticipo), observacion, modelo));
-               
-               
-                for (Articulo a : articulos) 
-                {
-                    articulo.create(new Articulo(new Nota(folio), a.getCantidad(), a.getDescripcion(), a.getCosto()));
-                }
-                
-                    articulos.clear();
-                    imei="";
-                    fechaentrega="";
-                    modelo="";
-                    sesion.setAttribute("imei", imei);
-                    sesion.setAttribute("fechaentrega", fechaentrega);
-                    sesion.setAttribute("modelo", modelo);
-                    sesion.setAttribute("validar", validar);
-                    
-                
-            }
-            else if (request.getParameter("Imprimir")!=null) 
-            {
-                Nota notas= nota.readUltimo();
-                int id_cliente = notas.getId_usuario();
-                Cliente c = cliente.readi(id_cliente);
-                ArrayList<Articulo> compras = articulo.read(notas.getFolio());
-                validar=0;
-                sesion.setAttribute("validar", validar);
-                
-                
                 try {
                         Document documento = new Document(new Rectangle(227,360),16, 16,16,16);
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
                         PdfWriter.getInstance(documento, baos);
                         // step 3
                         documento.open();
-                        Font titulos = new Font(FontFamily.COURIER, 16, Font.BOLD);
-                        Font subtitulos = new Font(FontFamily.COURIER,10, Font.BOLDITALIC
+                        Font titulos = new Font(Font.FontFamily.COURIER, 16, Font.BOLD);
+                        Font subtitulos = new Font(Font.FontFamily.COURIER,10, Font.BOLDITALIC
                         );
                         Chunk encabezado = new Chunk("El Celular Veloz" , titulos);
                         Chunk subencabezado = new Chunk(" La Nueva Tecnologia en Celular", subtitulos);
@@ -257,29 +160,12 @@ public class Registreishon extends HttpServlet {
                 de.printStackTrace();
                     System.err.println("documento " + de.getMessage());
                 }
-            }
-          }
-          catch(Exception e){
-          
-              System.out.println("Aqui hay algo raro");
-              mensaje= "No puedes agregar productos vacios, y debes registrar un anticipo, "
-                      + "si no lo hay registra 0";
-              request.setAttribute("mensaje", mensaje);
-              request.getRequestDispatcher("ventas.jsp").forward(request, response);
-          }finally {
-                        for (Articulo a: articulos) 
-                        {
-                        total = total + a.getCosto();
-                        }
-                        sesion.setAttribute("total",total);
-                        response.sendRedirect("ventas.jsp"); 
-                }                   
-    }
+        }
+        catch(Exception e){
+            mensaj="El folio que buscas no existe, intente nuevamente";
+            request.setAttribute("mensaj", mensaj);
+            request.getRequestDispatcher("notas.jsp").forward(request, response);
+        }
+      
+        }
 }
-
-
-
-
-
-
-

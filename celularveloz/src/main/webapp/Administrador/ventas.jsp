@@ -40,6 +40,8 @@
         <title>Administrador</title>
     </head>
     <body>
+        <input type="text" value="${sessionScope.validar}" id="validar" hidden>
+        <input type="text" value="${requestScope.mensaje}" id="mensaje" hidden>
         <div id="wrapper">
 
         <!-- Sidebar -->
@@ -82,77 +84,98 @@
                             <h1>Nota de Venta</h1><br>
                             
                             <form role="form" class="form-horizontal" action="registro.pdf" method="POST" name="nota">
-                                          
+                                
+ <%-- ------------------------------------------------Primer Renglon texto Folio, Fecha Recepcion y Fecha Entrega --%>                      
                                 <div class="row">
                                     
                                     <div class="col-md-4">
-                                        <div class="form-group">
-                                        <label>Folio</label>
-                                        <div class="col-md-11">
-                                        <input type="text" class="form-control" 
-                                               placeholder="Folio Nota" name="folio" value="<%= nota.getFolio()+1 %>" readonly="true">
-                                        </div>
-                                        </div>
+                                            <div class="form-group">
+                                            <label>Folio</label>
+                                            <div class="col-md-11">
+                                            <input type="text" class="form-control" 
+                                                   placeholder="Folio Nota" name="folio" value="<%= nota.getFolio()+1 %>" readonly="true">
+                                            </div>
+                                            </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <div class="form-group">
-                                        <label>Fecha de Recepcion: </label>
-                                        <div class="col-md-11">
-                                        <input type="text" class="form-control"
-                                               placeholder="Fecha" name="fecha" readonly="true"/> 
-                                        </div>
-                                        </div>
+                                            <div class="form-group">
+                                            <label>Fecha de Recepcion: </label>
+                                            <div class="col-md-11">
+                                            <input type="text" class="form-control"
+                                                   placeholder="Fecha" name="fecha" readonly="true"/> 
+                                            </div>
+                                            </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <div class="form-group">
-                                        <label>Fecha de Entrega:</label>  
-                                        <div class="col-md-11">
+                                            <div class="form-group">
+                                            <label>Fecha de Entrega:</label>  
+                                            <div class="col-md-11">
                                             <input type="text" class="form-control" name="fechaentrega" id="entrega"
-                                                   placeholder="dd-mm-yyyy" value="<%=fecha%>">  
+                                              placeholder="dd-mm-yyyy" value="<%=fecha%>">  
                                       </div>
                                         </div>
                                     </div>
                                 </div>
+ <%-- ------------------------------------------------Segundo Renglon texto Le atendio, Cliente y Imei --%>                      
                                 
-                                      <div class="row">
+                                <div class="row">
                                     
                                     <div class="col-md-4">
-                                        <div class="form-group">
-                                        <label>Le Atendio: </label>
-                                        <div class="col-md-11">
-                                        <input type="text" class="form-control" 
-                                               placeholder="Usuario" 
-                                               value="<jsp:getProperty name="usuario" property="nombre"/> <jsp:getProperty name="usuario" property="apellido" />"
-                                               disabled>
-                                        </div>
-                                        </div>
+                                            <div class="form-group">
+                                            <label>Le Atendio: </label>
+                                            <div class="col-md-11">
+                                            <input type="text" class="form-control" 
+                                            placeholder="Usuario" 
+                                            value="<jsp:getProperty name="usuario" property="nombre"/> <jsp:getProperty name="usuario" property="apellido" />"
+                                            disabled>
+                                            </div>
+                                            </div>
                                     </div>
                                     <div class="col-md-4">
-                                        <div class="form-group">
-                                        <label>Cliente: </label>
-                                        <div class="col-md-11">
-                                            <select class="form-control" name="clientestodos" >
-                                                <option value="${cl.id}">${cl.nombre} ${cl.apellido}</option>
-                                                 <c:forEach items="${clientes}" var="clientes">
-                                                     <option value="<c:out value= "${clientes.id}"/>">
-                                                     <c:out value="${clientes.nombre}"/>  
-                                                     <c:out value="${clientes.apellido}" />
-                                                     </option>
-                                                 </c:forEach>
-                                            </select>
-                                        </div>
-                                        </div>
+                                            <div class="form-group">
+                                            <label>Cliente: </label>
+                                            <div class="col-md-11">
+                                                <select class="form-control" name="clientestodos" >
+                                                    <option value="${cl.id}">${cl.nombre} ${cl.apellido}</option>
+                                                     <c:forEach items="${clientes}" var="clientes">
+                                                         <option value="<c:out value= "${clientes.id}"/>">
+                                                         <c:out value="${clientes.nombre}"/>  
+                                                         <c:out value="${clientes.apellido}" />
+                                                         </option>
+                                                     </c:forEach>
+                                                </select>
+                                            </div>
+                                            </div>
                                     </div>
+                                                     
                                     <div class="col-md-4">
-                                        <div class="form-group">
-                                        <label>IMEI</label>  
-                                        <div class="col-md-11">
-                                        <input type="text" class="form-control"
-                                               name="imei" value="${sessionScope.imei}" placeholder="IMEI" />  
-                                      </div>
-                                        </div>
+                                            <div class="form-group">
+                                            <label>Modelo</label>  
+                                            <div class="col-md-11">
+                                            <input type="text" class="form-control" name="modelo"
+                                              placeholder="Modelo" value="${sessionScope.modelo}">  
+                                            </div>
+                                            </div>
                                     </div>
+                                    
                                 </div>
+<%-- ------------------------------------------------Tercer Renglon texto Imei, Observaciones --%>                      
+                        <div class="row">
+                                <div class="col-md-4">
+                                            <div class="form-group">
+                                            <label>IMEI</label>  
+                                            <div class="col-md-11">
+                                            <input type="text" class="form-control"
+                                                   name="imei" placeholder="IMEI" value="${sessionScope.imei}" />  
+                                            </div>
+                                            </div>
+                                </div>
+                                            
+                                
+                        </div>
+                                
+
+<%-- ------------------------------------------------Cuarto Renglon Cantidad, Descripcion, Precio --%>   
                                         
                                 <div class="row">
                                     
@@ -232,34 +255,34 @@
                                       </div>
                                         </div>
                                 </div>
-                                        
-                                          <div class="row">
-                                    
-                                        <div class="form-group">
-                                        <label>Resta</label>  
-                                        <div class="col-md-11">
-                                        <input type="number" class="form-control"
-                                           placeholder="Resta" readonly="true">  
-                                      </div>
-                                        </div>
-                                    </div>
+                                     
                                             
                                             </div>
                                             
                                         </div>
+                                               <div class="row">
+                                            <div class="form-group">
+                                            <label>Observaciones</label>  
+                                            <div class="col-md-11">
+                                            <input type="text" class="form-control"
+                                                   name="observacioni" id="observacion" placeholder="Observaciones" value="${sessionScope.observacion}"/>  
+                                            </div>
+                                            </div>
+                                </div>
+                                               </div>
                                                <br>
                                         <div class="row">
                                             <div class="col-md-3">
-                                                <button type="submit" class="btn btn-success" name="Agregar" value="Agregar">Agregar</button>
+                                                <button type="submit" class="btn btn-success" name="Agregar" id="agregar" value="Agregar">Agregar</button>
                                             </div>
                                             <div class="col-md-3">
-                                            <button type="submit" class="btn btn-danger" name="eliminar" value="eliminar">Eliminar</button>
+                                                <button type="submit" class="btn btn-danger" name="eliminar" id="eliminar" value="eliminar">Eliminar</button>
                                             </div>
                                             <div class="col-md-3">
-                                            <button type="submit" class="btn btn-info" name="Imprimir" value="Imprimir">Imprimir</button>
+                                                <button type="submit" class="btn btn-info" name="Imprimir" id="imprimir" value="Imprimir">Imprimir</button>
                                             </div>
                                             <div class="co-md-3">
-                                            <button type="submit" class="btn btn-warning" name="Finalizar" value="Finalizar">Registrar Venta</button>
+                                                <button type="submit" class="btn btn-warning" name="Finalizar" id="finalizar" value="Finalizar">Registrar Venta</button>
                                             </div>
                                             
                                         </div>         
@@ -285,7 +308,31 @@
     document.nota.fecha.value= date;
     
     </script>
+    
+    <script>
+        var validar= document.getElementById("validar").value;
+        var imprimir= document.getElementById("imprimir");
+        
+        if (validar==null || validar=="" ||validar==0) 
+        {
+           imprimir.disabled = true;
+        }
+        else {
+            imprimir.disabled= false;
+        }
+    </script>
 
+    <script>
+        var mensaje= document.getElementById("mensaje").value;
+        
+        if (mensaje==null || mensaje=="") 
+        {
+           
+        }
+        else {
+            alert(mensaje);
+        }
+    </script>
     <script src="../js/libs/jquery/jquery.js"></script>
     <script src="../js/libs/bootstrap/js/bootstrap.min.js"></script>
   

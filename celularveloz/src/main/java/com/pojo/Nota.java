@@ -17,7 +17,9 @@ public class Nota {
     private String observaciones;
     private String estatusNota;
     private String estatusReparacion;
-
+    private String obsreparacion;
+    private String modelo;
+    
     public Nota(){
         
     }
@@ -27,7 +29,8 @@ public class Nota {
     }
 
     public Nota(int folio, String fecharecibido, String fechaentrega, String login, int id_usuario, String imei,
-            double total, double anticipo, double resta, String observaciones) 
+            double total, double anticipo, double resta, String estatusNota, String estatusReparacion,
+            String observaciones, String obsreparacion, String modelo) 
     {
         this.folio = folio;
         this.fecharecibido = fecharecibido;
@@ -38,11 +41,16 @@ public class Nota {
         this.total = total;
         this.anticipo = anticipo;
         this.resta = resta;
+        this.estatusNota= estatusNota;
+        this.estatusReparacion= estatusReparacion;
         this.observaciones= observaciones;
+        this.obsreparacion= obsreparacion;
+        this.modelo= modelo;
         
     }
 
-    public Nota(int folio, String fecharecibido, String fechaentrega, Usuario u, Cliente e, String imei, double total, double anticipo, double resta) {
+    public Nota(int folio, String fecharecibido, String fechaentrega, Usuario u, Cliente e, String imei, double total, double anticipo, double resta,
+            String observaciones, String modelo) {
         this.folio = folio;
         this.fecharecibido = fecharecibido;
         this.fechaentrega = fechaentrega;
@@ -52,6 +60,8 @@ public class Nota {
         this.total = total;
         this.anticipo = anticipo;
         this.resta = resta;
+        this.observaciones= observaciones;
+        this.modelo= modelo;
     }
 
     public Nota(int folio, String estatusNota, String estatusReparacion) {
@@ -171,6 +181,22 @@ public class Nota {
 
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
+    }
+
+    public String getObsreparacion() {
+        return obsreparacion;
+    }
+
+    public void setObsreparacion(String obsreparacion) {
+        this.obsreparacion = obsreparacion;
+    }
+
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
     }
  
 }

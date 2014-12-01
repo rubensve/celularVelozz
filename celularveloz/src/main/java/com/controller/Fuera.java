@@ -27,12 +27,11 @@ public class Fuera extends HttpServlet {
         try {
             String nombre= request.getParameter("nomB");
             String apellido = request.getParameter("apeB");
-            String direccion= request.getParameter("dirB");
             String telefono= request.getParameter("telB");    
             int id = Integer.parseInt(request.getParameter("idB"));
             ClienteDAO usuario = new ClienteDAO();
             
-            boolean ver = usuario.update(new Cliente(id,nombre,apellido,direccion,telefono));
+            boolean ver = usuario.update(new Cliente(id,nombre,apellido,telefono));
             
             if (ver) 
             {

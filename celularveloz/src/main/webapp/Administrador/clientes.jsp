@@ -137,11 +137,7 @@
                                                   <input type="text" class="form-control" name="apeA" 
                                                          placeholder="Apellido" required>
                                                 </div>
-                                                <div class="form-group">
-                                                  <label>Dirección</label>
-                                                  <input type="text" class="form-control" name="dirA" 
-                                                         placeholder="Dirección" required>
-                                                </div>
+                         
                                                 <div class="form-group">
                                                   <label>Telefono</label>
                                                   <input type="tel" class="form-control" name="telA" 
@@ -222,13 +218,7 @@
                                                   <input type="text" class="form-control" name="apeB" 
                                                          placeholder="Apellido" required>
                                                 </div>
-                                              
-                                              <div class="form-group">
-                                                  <label>Dirección</label>
-                                                  <input type="text" class="form-control" name="dirB" 
-                                                         placeholder="Nombre del Cliente" required>
-                                                </div>
-                                                
+                                                                                           
                                                 <div class="form-group">
                                                   <label>Telefono</label>
                                                   <input type="text" class="form-control" name="telB" 

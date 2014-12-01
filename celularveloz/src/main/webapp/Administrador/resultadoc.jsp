@@ -71,7 +71,6 @@
                                         <th>ID Cliente</th>
                                         <th>Nombre</th>
                                         <th>Apellido</th>
-                                        <th>Direccion</th>
                                         <th>Telefono</th>
                                     </tr>
                                 </thead>
@@ -81,7 +80,6 @@
                                           <td><c:out value="${clientes.id}"/></td>
                                           <td><c:out value="${clientes.nombre}"/></td>
                                           <td><c:out value="${clientes.apellido}"/></td>
-                                          <td><c:out value="${clientes.direccion}"/></td>
                                           <td><c:out value="${clientes.telefono}"/></td>
                                           </tr>
                                             </c:forEach>

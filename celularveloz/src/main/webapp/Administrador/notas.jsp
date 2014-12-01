@@ -97,7 +97,7 @@
 
                             </form>
                         </div>
-                        
+                        <hr>
                          <div class="container-fluid" id="finalizarn">
                             <h3>Finalizar Notas</h3>
                             <form action="fina.fin" method="post">
@@ -108,7 +108,7 @@
                                         <label>Folio Nota:</label>  
                                         <div class="col-md-11">
                                             <input type="text" class="form-control" name="folion"
-                                                   placeholder="Folio"/>  
+                                                   placeholder="Folio"  required/>  
                                   </div>
                                   </div>
                                     </div>
@@ -127,6 +127,7 @@
                                     <div class="form-group">
                                         <label>Estado de Nota:</label>  
                                         <select class="form-control" name="estatusnota">
+                                            <option>Abierta</option>
                                             <option>Pagada</option>
                                             <option>Cancelada</option>
                                         </select>
@@ -140,7 +141,7 @@
                                 </div>
                             </form>
                         </div>
-                        
+                          <hr>
                         <div class="container-fluid" id="reimpresion">
                             <h3>Reimpresion de Notas</h3>
                             <form action="reimpr.pdf" method="post">
@@ -152,7 +153,7 @@
                                         <label>Folio Nota:</label>  
                                         <div class="col-md-11">
                                             <input type="text" class="form-control" name="folion"
-                                                   placeholder="Folio"/>  
+                                                   placeholder="Folio" required/>  
                                   </div>
                                   </div>
                                     </div>
@@ -165,7 +166,7 @@
                                 </div>
                             </form>
                         </div>
-                        
+                          <hr>
                         <div class="container-fluid" id="elimin">
                             <h3>Eliminar Nota</h3>
                             <form action="elim.el" method="post">
@@ -177,7 +178,7 @@
                                         <label>Folio Nota:</label>  
                                         <div class="col-md-11">
                                             <input type="text" class="form-control" name="folion"
-                                                   placeholder="Folio"/>  
+                                                   placeholder="Folio" required/>  
                                   </div>
                                   </div>
                                     </div>

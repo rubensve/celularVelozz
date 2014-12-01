@@ -14,6 +14,7 @@ public class ArticuloDAO implements DAO<Articulo> {
     private final String SQL_CREATE= "insert into articulosnota (folio, cantidad, descripcion, precio) "
             + "values(?,?,?,?) ";
     private final String SQL_READ= "select * from articulosnota where folio = ? ";
+    private final String SQL_DELETE= "delete from articulosnota where folio = ? ";
     
   
     Conexion conexion= Conexion.getConexion();
@@ -48,7 +49,21 @@ public class ArticuloDAO implements DAO<Articulo> {
 
     @Override
     public boolean delete(Object key) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     PreparedStatement ps;
+        try {    
+            ps= conexion.getCc().prepareStatement(SQL_DELETE);
+            ps.setString(1, key.toString());
+            
+            if (ps.executeUpdate()>0) 
+            {
+             return true;   
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ArticuloDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } finally{
+            conexion.cerrarConexion();
+            }
+        return false;
     }
 
     @Override

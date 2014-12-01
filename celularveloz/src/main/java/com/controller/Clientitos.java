@@ -23,11 +23,10 @@ public class Clientitos extends HttpServlet {
         try {
             String nombre= request.getParameter("nomA");
             String apellido = request.getParameter("apeA");
-            String direccion= request.getParameter("dirA");
             String telefono= request.getParameter("telA");
             ClienteDAO cliente =new ClienteDAO();
-            boolean rev= cliente.create(new Cliente(nombre, apellido, direccion, telefono));
-            if (rev) 
+            boolean rev= cliente.create(new Cliente(nombre, apellido, telefono));
+            if (rev=true) 
             {
                 mensajes="Cliente Registrado Correctamente";
                 request.setAttribute("mensajes", mensajes);
