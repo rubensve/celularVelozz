@@ -90,13 +90,8 @@ public class Registreishon extends HttpServlet {
                 sesion.setAttribute("modelo", modelo);
                 sesion.setAttribute("observacion", observacion);
                 sesion.setAttribute("cl", cl);
-                if (cantidad>0 || (descripcion !=null || descripcion.equals("")) || precio>0)
-                {
                 articulos.add(new Articulo(new Nota(folio),cantidad, descripcion, precio)); 
-                sesion.setAttribute("articulos", articulos);
-                }
-                
-                
+
             }
             else if(request.getParameter("eliminar")!=null)
             {
@@ -119,13 +114,7 @@ public class Registreishon extends HttpServlet {
                double anticipo = Double.parseDouble(request.getParameter("anticipo"));
                double totalv= Double.parseDouble(request.getParameter("total"));               
                validar=1;
-               
-                if (observacion.equals("") || observacion==null) 
-                {
-                    observacion="Sin observaciones";
-                }
-                
-               
+             
                nota.create(new Nota(folio, fecharecepcion, fechaentrega, new Usuario(login), new Cliente(id_cliente), imei, 
                        totalv, anticipo, (totalv-anticipo), observacion, modelo));
                
@@ -154,8 +143,7 @@ public class Registreishon extends HttpServlet {
                 ArrayList<Articulo> compras = articulo.read(notas.getFolio());
                 validar=0;
                 sesion.setAttribute("validar", validar);
-                
-                
+
                 try {
                         Document documento = new Document(new Rectangle(227,360),16, 16,16,16);
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -265,14 +253,15 @@ public class Registreishon extends HttpServlet {
               mensaje= "No puedes agregar productos vacios, y debes registrar un anticipo, "
                       + "si no lo hay registra 0";
               request.setAttribute("mensaje", mensaje);
-              request.getRequestDispatcher("ventas.jsp").forward(request, response);
+              
           }finally {
                         for (Articulo a: articulos) 
                         {
                         total = total + a.getCosto();
                         }
+                        sesion.setAttribute("articulos", articulos);
                         sesion.setAttribute("total",total);
-                        response.sendRedirect("ventas.jsp"); 
+                        request.getRequestDispatcher("ventas.jsp").forward(request, response);
                 }                   
     }
 }

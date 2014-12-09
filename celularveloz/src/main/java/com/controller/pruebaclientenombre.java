@@ -5,8 +5,13 @@
  */
 package com.controller;
 
+import com.dao.ArticuloDAO;
 import com.dao.ClienteDAO;
+import com.dao.NotaDAO;
+import com.pojo.Articulo;
 import com.pojo.Cliente;
+import com.pojo.Nota;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,9 +20,8 @@ import com.pojo.Cliente;
 public class pruebaclientenombre {
     
     public static void main(String[] args) {
-        ClienteDAO clientes = new ClienteDAO();
-        Cliente cliente= clientes.readinombre("ruben", "veloz");
-        System.out.println(cliente.getId()+" " + cliente.getNombre()+" " + cliente.getApellido()+ " " + cliente.getTelefono());
+      
+        NotaDAO notas= new NotaDAO();
         
         
         

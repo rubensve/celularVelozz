@@ -304,7 +304,14 @@
     var mm = currentDt.getMonth() + 1;
     var dd = currentDt.getDate();
     var yyyy = currentDt.getFullYear();
-    var date = dd + '-' + mm + '-' + yyyy;
+    
+    if (dd<10) 
+    {
+    var date = '0'+ dd + '-' + mm + '-' + yyyy;
+    }
+    else{
+    var date = dd + '-' + mm + '-' + yyyy; 
+    }
     document.nota.fecha.value= date;
     
     </script>

@@ -6,6 +6,7 @@ public class Articulo
  private int cantidad;
  private String descripcion;
  private double costo;
+ private int folio;
  
  public Articulo(){
      
@@ -16,6 +17,13 @@ public class Articulo
     }
 
     public Articulo(int cantidad, String descripcion, double costo) {
+        this.cantidad = cantidad;
+        this.descripcion = descripcion;
+        this.costo = costo;
+    }
+    
+    public Articulo(int folio, int cantidad, String descripcion, double costo) {
+        this.folio= folio;
         this.cantidad = cantidad;
         this.descripcion = descripcion;
         this.costo = costo;
@@ -60,5 +68,13 @@ public class Articulo
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public int getFolio() {
+        return folio;
+    }
+
+    public void setFolio(int folio) {
+        this.folio = folio;
     }
 }

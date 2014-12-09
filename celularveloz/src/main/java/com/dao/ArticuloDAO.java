@@ -79,7 +79,7 @@ public class ArticuloDAO implements DAO<Articulo> {
             
             while (rs.next()) 
             {                
-              art.add(new Articulo(rs.getInt(2), rs.getString(3), rs.getDouble(4)));
+              art.add(new Articulo(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getDouble(4)));
             }
             
             return art;

@@ -42,6 +42,7 @@ public class Notita extends HttpServlet {
         UsuarioDAO usuarios= new UsuarioDAO();
         Usuario usuario=null;
         ArticuloDAO articulo= new ArticuloDAO();
+        ArrayList <Nota> anotas;
         
             if (criterio.equalsIgnoreCase("Folio")) 
             {
@@ -49,7 +50,7 @@ public class Notita extends HttpServlet {
                 nota= notas.readi(folion);
                 cliente= clientes.readi(nota.getId_usuario());
                 usuario= usuarios.login(nota.getLogin());
-                ArrayList<Articulo> articulos = articulo.read(nota.getFolio());
+                ArrayList<Articulo>articulos= articulo.read(nota.getFolio());
                 session.setAttribute("nota",nota);
                 session.setAttribute("usuario", usuario);
                 session.setAttribute("cliente", cliente);
@@ -59,8 +60,20 @@ public class Notita extends HttpServlet {
             {
                 String nombre = request.getParameter("nombre");
                 String apellido = request.getParameter("apellido");
+                cliente= clientes.readinombre(nombre, apellido);              
+                anotas= notas.readPorCliente(cliente.getId());
+                ArrayList<ArrayList<Articulo>> articulos= new ArrayList();
                 
                 
+                for (Nota a : anotas) 
+                {
+                    articulos.add(articulo.read(a.getFolio()));
+                }
+                
+                session.setAttribute("anotas", anotas);
+                session.setAttribute("cliente", cliente);
+                session.setAttribute("articulos", articulos);
+                response.sendRedirect("resultadont.jsp");
                 
             }
             else if (criterio.equalsIgnoreCase("fecha")) 

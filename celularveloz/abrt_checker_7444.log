@@ -1,0 +1,3 @@
+Uncaught java.lang.NullPointerException exception in thread "main" in a method com.controller.pruebaclientenombre.main() with signature ([Ljava/lang/String;)V
+Exception in thread "main" java.lang.NullPointerException
+	at com.controller.pruebaclientenombre.main(pruebaclientenombre.java:46) [file:/home/rubens/NetBeansProjects/celularVelozz/celularveloz/target/classes/com/controller/pruebaclientenombre.class]

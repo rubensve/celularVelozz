@@ -26,9 +26,10 @@ public class Finalizado extends HttpServlet {
         int folio = Integer.parseInt(request.getParameter("folion"));
         String estatusnota= request.getParameter("estatusnota");
         String estatusreparacion = request.getParameter("reparacion");
+        String obsreparacion= request.getParameter("obsreparacion");
         
        
-        boolean veri= notas.update(new Nota(folio, estatusnota, estatusreparacion));
+        boolean veri= notas.update(new Nota(folio, estatusnota, estatusreparacion, obsreparacion));
         
         if (veri) 
         {

@@ -21,8 +21,10 @@ public class NotaDAO implements DAO <Nota>{
                                         " VALUES (?,?,?,?,?,?,?,?,?,?,?)";
     private static final String SQL_READULTIMOF = "Select * from notas order by folio desc limit 1" ;
     private static final String SQL_READ= "select * from notas where folio= ?";
+    private static final String SQL_READCLIENTES= "select * from notas where id_cliente= ?";
+    private static final String SQL_READFECHAS= "select * from notas where fecharecepcion= ? AND f";
     private static final String SQL_READALL= "select * from notas";
-    private static final String SQL_UPDATE= "update notas set estatusnota=?, estatusreparacion=?"
+    private static final String SQL_UPDATE= "update notas set estatusnota=?, estatusreparacion=?, obsreparacion=?"
             + " where folio=?";
     private static final String SQL_DELETE= "delete from notas where folio=?";
 
@@ -113,8 +115,9 @@ public class NotaDAO implements DAO <Nota>{
             
             ps.setString(1, n.getEstatusNota());
             ps.setString(2, n.getEstatusReparacion());
-            ps.setInt(3, n.getFolio());
-            
+            ps.setString(3, n.getObsreparacion());
+            ps.setInt(4, n.getFolio());
+
             if (ps.executeUpdate()>0)
             {    
                 return true;
@@ -147,6 +150,28 @@ public class NotaDAO implements DAO <Nota>{
         return false;
     
                 }
+    
+    public ArrayList<Nota> readPorCliente(int id_cliente)
+    {
+            PreparedStatement ps;
+            ArrayList<Nota> notas = new ArrayList();
+            ResultSet rs;
+        try {
+            ps= conexion.getCc().prepareStatement(SQL_READCLIENTES);
+            ps.setInt(1, id_cliente);
+            rs= ps.executeQuery();
+            
+            while (rs.next())
+            {
+                notas.add(new Nota(rs.getInt("folio"), rs.getString(2), rs.getString(3), rs.getString(4),
+                        rs.getInt(5), rs.getString(6), rs.getDouble(7), rs.getDouble(8), rs.getDouble(9),
+                        rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13), rs.getString(14)));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(NotaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return notas;
+    }
 
     @Override
     public ArrayList<Nota> read(Object key) {

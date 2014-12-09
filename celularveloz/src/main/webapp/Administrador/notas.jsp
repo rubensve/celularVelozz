@@ -103,7 +103,7 @@
                             <form action="fina.fin" method="post">
                                 
                                 <div class="row" >
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                     <div class="form-group">
                                         <label>Folio Nota:</label>  
                                         <div class="col-md-11">
@@ -113,7 +113,7 @@
                                   </div>
                                     </div>
                                     
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                     <div class="form-group">
                                         <label>Reparacion:</label>  
                                         <select class="form-control" name="reparacion">
@@ -123,7 +123,7 @@
                                   </div>
                                     </div>
                                     
-                                    <div class="col-md-3">
+                                    <div class="col-md-2">
                                     <div class="form-group">
                                         <label>Estado de Nota:</label>  
                                         <select class="form-control" name="estatusnota">
@@ -133,12 +133,20 @@
                                         </select>
                                   </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <br>                                        
-                                     <button type="submit" class="btn btn-warning btn-lg">Finalizar</button>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label>Detalle de la Reparación</label>
+                                            <textarea class="form-control" rows="3" name="obsreparacion">
+                                            </textarea>
                                     </div>
-                                
                                 </div>
+                                    
+                                    <div class="col-md-2">
+                                 <br> 
+                                <button type="submit" class="btn btn-warning btn-lg">Finalizar</button>
+                                    </div>
+                                    
+                                
                             </form>
                         </div>
                           <hr>

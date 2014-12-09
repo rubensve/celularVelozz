@@ -64,10 +64,11 @@ public class Nota {
         this.modelo= modelo;
     }
 
-    public Nota(int folio, String estatusNota, String estatusReparacion) {
+    public Nota(int folio, String estatusNota, String estatusReparacion, String obsreparacion) {
         this.folio = folio;
         this.estatusNota = estatusNota;
         this.estatusReparacion = estatusReparacion;
+        this.obsreparacion= obsreparacion;
     }
 
     
