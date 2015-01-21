@@ -76,7 +76,7 @@
                                     <div class="row">
                                         
                                         <div class="col-md-4">
-                                            <p class="text-muted">Fecha de Recepcion: </p><p class="text-success">${anotas.fecharecibido}</p>
+                                            <p class="text-muted">Fecha de Recepcion: </p><p class="text-success">${anotas.fecharecepcion}</p>
                                         </div>
                                         
                                         <div class="col-md-4">
@@ -138,11 +138,11 @@
                                         <div class="row">
                                            
                                             <div class="col-md-3">
-                                              <p class="text-muted">Estatus Nota: </p><p class="text-success">${anotas.estatusNota}</p>   
+                                              <p class="text-muted">Estatus Nota: </p><p class="text-success">${anotas.descripcionnota}</p>   
                                             </div>
                                             
                                             <div class="col-md-3">
-                                              <p class="text-muted">Estatus Reparacion: </p><p class="text-success">${anotas.estatusReparacion}</p> 
+                                              <p class="text-muted">Estatus Reparacion: </p><p class="text-success">${anotas.descripcionreparacion}</p> 
                                             </div>
                                             
                                             <div class="col-md-3">

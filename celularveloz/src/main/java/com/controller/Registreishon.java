@@ -115,8 +115,8 @@ public class Registreishon extends HttpServlet {
                double totalv= Double.parseDouble(request.getParameter("total"));               
                validar=1;
              
-               nota.create(new Nota(folio, fecharecepcion, fechaentrega, new Usuario(login), new Cliente(id_cliente), imei, 
-                       totalv, anticipo, (totalv-anticipo), observacion, modelo));
+               nota.create(new Nota(fechaentrega, new Usuario(login), new Cliente(id_cliente), imei, modelo, 
+                       totalv, anticipo, (totalv-anticipo), observacion));
                
                
                 for (Articulo a : articulos) 
@@ -137,8 +137,8 @@ public class Registreishon extends HttpServlet {
             }
             else if (request.getParameter("Imprimir")!=null) 
             {
-                Nota notas= nota.readUltimo();
-                int id_cliente = notas.getId_usuario();
+                Nota notas= nota.leerultimo();
+                int id_cliente = notas.getId_cliente();
                 Cliente c = cliente.readi(id_cliente);
                 ArrayList<Articulo> compras = articulo.read(notas.getFolio());
                 validar=0;
@@ -177,7 +177,7 @@ public class Registreishon extends HttpServlet {
                                 FontFactory.getFont("Courier", 16, Font.BOLDITALIC)));
                         
                         documento.add(new Paragraph("Atendio:" + u.getNombre() + " " + u.getApellido()
-                                + " Recibido:" +notas.getFecharecibido() ,
+                                + " Recibido:" +notas.getFecharecepcion(),
                                 FontFactory.getFont("Courier", 7)));
                         documento.add(new Paragraph("Cliente:" + c.getNombre() + " " + c.getApellido()
                                 + " Entrega:" +notas.getFechaentrega(),
@@ -206,7 +206,7 @@ public class Registreishon extends HttpServlet {
                         documento.add(new Paragraph("Observaciones:"+ notas.getObservaciones(),
                          FontFactory.getFont("Courier", 7)));  
                          documento.add(new Paragraph("Total:"+notas.getTotal()+" Anticipo:" + 
-                                 notas.getAnticipo()+" Adeudo:"+ notas.getResta(),
+                                 notas.getAnticipo()+" Adeudo:"+ notas.getResto(),
                          FontFactory.getFont("Courier", 8)));      
                          Chunk nl = new Chunk(NEWLINE);
                          documento.add(nl);

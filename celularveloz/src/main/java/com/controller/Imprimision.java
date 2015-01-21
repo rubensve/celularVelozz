@@ -38,6 +38,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author rubens
  */
+
+/*
 @WebServlet(name = "Reimprimision", urlPatterns = {"/Administrador/reimpr.pdf"})
 public class Imprimision extends HttpServlet {
 
@@ -169,3 +171,4 @@ public class Imprimision extends HttpServlet {
       
         }
 }
+*/

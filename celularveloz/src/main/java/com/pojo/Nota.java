@@ -1,91 +1,150 @@
 package com.pojo;
 
-
 public class Nota {
 
     private int folio;
-    private String fecharecibido;
+    private String fecharecepcion;
     private String fechaentrega;
+    private Usuario u;
+    private Cliente c;
     private String login;
-    private int id_usuario;
-    private Usuario u; 
-    private Cliente e;
+    private int id_cliente;
     private String imei;
+    private String modelo;
     private double total;
     private double anticipo;
-    private double resta;
+    private String descripcionnota;
+    private String descripcionreparacion;
+    private double resto;
+    private int id_estatusnota;
+    private int id_estatusreparacion;
     private String observaciones;
-    private String estatusNota;
-    private String estatusReparacion;
     private String obsreparacion;
-    private String modelo;
     
-    public Nota(){
-        
+
+    
+    public Nota() 
+    {
     }
+
+    public Nota(int folio, String fecharecepcion, String fechaentrega, String login, int id_cliente, String imei, String modelo, double total, double anticipo, int id_estatusnota, int id_estatusreparacion, String observaciones, String obsreparacion) {
+        this.folio = folio;
+        this.fecharecepcion = fecharecepcion;
+        this.fechaentrega = fechaentrega;
+        this.login = login;
+        this.id_cliente = id_cliente;
+        this.imei = imei;
+        this.modelo = modelo;
+        this.total = total;
+        this.anticipo = anticipo;
+        this.id_estatusnota = id_estatusnota;
+        this.id_estatusreparacion = id_estatusreparacion;
+        this.observaciones = observaciones;
+        this.obsreparacion = obsreparacion;
+    }
+    
+    
+    
+    
     
     public Nota(int folio) {
         this.folio = folio;
     }
 
-    public Nota(int folio, String fecharecibido, String fechaentrega, String login, int id_usuario, String imei,
-            double total, double anticipo, double resta, String estatusNota, String estatusReparacion,
-            String observaciones, String obsreparacion, String modelo) 
-    {
-        this.folio = folio;
-        this.fecharecibido = fecharecibido;
-        this.fechaentrega = fechaentrega;
-        this.login = login;
-        this.id_usuario = id_usuario;
-        this.imei = imei;
-        this.total = total;
-        this.anticipo = anticipo;
-        this.resta = resta;
-        this.estatusNota= estatusNota;
-        this.estatusReparacion= estatusReparacion;
-        this.observaciones= observaciones;
-        this.obsreparacion= obsreparacion;
-        this.modelo= modelo;
-        
-    }
-
-    public Nota(int folio, String fecharecibido, String fechaentrega, Usuario u, Cliente e, String imei, double total, double anticipo, double resta,
+    public Nota(int folio, String fecharecepcion, String fechaentrega, Usuario u, Cliente c,String imei, double total, double anticipo, double resto,
             String observaciones, String modelo) {
         this.folio = folio;
-        this.fecharecibido = fecharecibido;
+        this.fecharecepcion = fecharecepcion;
         this.fechaentrega = fechaentrega;
         this.u = u;
-        this.e = e;
-        this.imei = imei;
+        this.c = c;
+        this.imei= imei;
         this.total = total;
         this.anticipo = anticipo;
-        this.resta = resta;
-        this.observaciones= observaciones;
+        this.resto = resto;
+        this.observaciones = observaciones;
         this.modelo= modelo;
     }
 
-    public Nota(int folio, String estatusNota, String estatusReparacion, String obsreparacion) {
-        this.folio = folio;
-        this.estatusNota = estatusNota;
-        this.estatusReparacion = estatusReparacion;
-        this.obsreparacion= obsreparacion;
+    public Nota(String fechaentrega, Usuario u, Cliente c, String imei, String modelo, double total, double anticipo, double resto, String observaciones) {
+        this.fechaentrega = fechaentrega;
+        this.u = u;
+        this.c = c;
+        this.imei = imei;
+        this.modelo = modelo;
+        this.total = total;
+        this.anticipo = anticipo;
+        this.resto = resto;
+        this.observaciones = observaciones;
     }
-
     
-    public int getFolio() {
-        return folio;
-    }
+    
+    
 
-    public void setFolio(int folio) {
+    public Nota(int folio, String fecharecepcion, String fechaentrega, String login, int id_cliente, String imei, String modelo, double total, double anticipo, double resto, int id_estatusnota, int id_estatusreparacion, String observaciones, String obsreparacion) {
         this.folio = folio;
+        this.fecharecepcion = fecharecepcion;
+        this.fechaentrega = fechaentrega;
+        this.login = login;
+        this.id_cliente = id_cliente;
+        this.imei = imei;
+        this.modelo=modelo;
+        this.total = total;
+        this.anticipo = anticipo;
+        this.resto = resto;
+        this.id_estatusnota = id_estatusnota;
+        this.id_estatusreparacion = id_estatusreparacion;
+        this.observaciones = observaciones;
+        this.obsreparacion = obsreparacion;
+    }
+    
+    public Nota(int folio, String fecharecepcion, String fechaentrega, String login, int id_cliente, String imei, String modelo, double total, double anticipo, String descripcionnota, String descripcionreparacion, String observaciones, String obsreparacion) {
+        this.folio = folio;
+        this.fecharecepcion = fecharecepcion;
+        this.fechaentrega = fechaentrega;
+        this.login = login;
+        this.id_cliente = id_cliente;
+        this.imei = imei;
+        this.modelo = modelo;
+        this.total = total;
+        this.anticipo = anticipo;
+        this.descripcionnota = descripcionnota;
+        this.descripcionreparacion = descripcionreparacion;
+        this.observaciones = observaciones;
+        this.obsreparacion = obsreparacion;
+    }
+    
+
+    public Nota(int folio, String fecharecepcion, String fechaentrega, Usuario u, Cliente c, String imei, double total, double anticipo, double resto, int id_estatusnota, int id_estatusreparacion, String observaciones, String obsreparacion) {
+        this.folio = folio;
+        this.fecharecepcion = fecharecepcion;
+        this.fechaentrega = fechaentrega;
+        this.u = u;
+        this.c = c;
+        this.imei = imei;
+        this.total = total;
+        this.anticipo = anticipo;
+        this.resto = resto;
+        this.id_estatusnota = id_estatusnota;
+        this.id_estatusreparacion = id_estatusreparacion;
+        this.observaciones = observaciones;
+        this.obsreparacion = obsreparacion;
     }
 
-    public String getFecharecibido() {
-        return fecharecibido;
+    public String getObsreparacion() {
+        return obsreparacion;
     }
 
-    public void setFecharecibido(String fecharecibido) {
-        this.fecharecibido = fecharecibido;
+    public void setObsreparacion(String obsreparacion) {
+        this.obsreparacion = obsreparacion;
+    }
+
+    public String getFecharecepcion() {
+        return fecharecepcion;
+    }
+
+    public void setFecharecepcion(String fecharecepcion) {
+        this.fecharecepcion = fecharecepcion;
     }
 
     public String getFechaentrega() {
@@ -104,12 +163,12 @@ public class Nota {
         this.u = u;
     }
 
-    public Cliente getE() {
-        return e;
+    public Cliente getC() {
+        return c;
     }
 
-    public void setE(Cliente e) {
-        this.e = e;
+    public void setC(Cliente c) {
+        this.c = c;
     }
 
     public String getImei() {
@@ -136,44 +195,28 @@ public class Nota {
         this.anticipo = anticipo;
     }
 
-    public double getResta() {
-        return resta;
+    public double getResto() {
+        return resto;
     }
 
-    public void setResta(double resta) {
-        this.resta = resta;
+    public void setResto(double resto) {
+        this.resto = resto;
     }
 
-    public String getEstatusNota() {
-        return estatusNota;
+    public int getId_estatusnota() {
+        return id_estatusnota;
     }
 
-    public void setEstatusNota(String estatusNota) {
-        this.estatusNota = estatusNota;
+    public void setId_estatusnota(int id_estatusnota) {
+        this.id_estatusnota = id_estatusnota;
     }
 
-    public String getEstatusReparacion() {
-        return estatusReparacion;
+    public int getId_estatusreparacion() {
+        return id_estatusreparacion;
     }
 
-    public void setEstatusReparacion(String estatusReparacion) {
-        this.estatusReparacion = estatusReparacion;
-    }
-
-    public int getId_usuario() {
-        return id_usuario;
-    }
-
-    public void setId_usuario(int id_usuario) {
-        this.id_usuario = id_usuario;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
+    public void setId_estatusreparacion(int id_estatusreparacion) {
+        this.id_estatusreparacion = id_estatusreparacion;
     }
 
     public String getObservaciones() {
@@ -184,12 +227,28 @@ public class Nota {
         this.observaciones = observaciones;
     }
 
-    public String getObsreparacion() {
-        return obsreparacion;
+    public int getFolio() {
+        return folio;
     }
 
-    public void setObsreparacion(String obsreparacion) {
-        this.obsreparacion = obsreparacion;
+    public void setFolio(int folio) {
+        this.folio = folio;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public int getId_cliente() {
+        return id_cliente;
+    }
+
+    public void setId_cliente(int id_cliente) {
+        this.id_cliente = id_cliente;
     }
 
     public String getModelo() {
@@ -199,5 +258,23 @@ public class Nota {
     public void setModelo(String modelo) {
         this.modelo = modelo;
     }
- 
+
+    public String getDescripcionnota() {
+        return descripcionnota;
+    }
+
+    public void setDescripcionnota(String descripcionnota) {
+        this.descripcionnota = descripcionnota;
+    }
+
+    public String getDescripcionreparacion() {
+        return descripcionreparacion;
+    }
+
+    public void setDescripcionreparacion(String descripcionreparacion) {
+        this.descripcionreparacion = descripcionreparacion;
+    }
+    
+    
+    
 }

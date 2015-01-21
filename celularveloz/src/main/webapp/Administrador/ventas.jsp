@@ -22,8 +22,9 @@
     response.addHeader("Cache-Control", "no-store");
     response.setDateHeader("Expires", 0);
     String fecha = (String)session.getAttribute("fechaentrega");
+    
     NotaDAO notas= new NotaDAO();
-    Nota nota= notas.readUltimo();
+    Nota nota= notas.leerultimo();
     
     if ( (fecha == null) || (fecha.equals("")) ) {
       fecha = "";
@@ -111,7 +112,7 @@
                                             <label>Fecha de Entrega:</label>  
                                             <div class="col-md-11">
                                             <input type="text" class="form-control" name="fechaentrega" id="entrega"
-                                              placeholder="dd-mm-yyyy" value="<%=fecha%>">  
+                                              placeholder="yyyy-mm-dd" value="<%=fecha%>">  
                                       </div>
                                         </div>
                                     </div>
@@ -310,7 +311,7 @@
     var date = '0'+ dd + '-' + mm + '-' + yyyy;
     }
     else{
-    var date = dd + '-' + mm + '-' + yyyy; 
+    var date = yyyy + '-' + mm + '-' + dd; 
     }
     document.nota.fecha.value= date;
     

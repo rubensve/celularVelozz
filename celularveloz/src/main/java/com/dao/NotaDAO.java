@@ -1,10 +1,7 @@
-
 package com.dao;
 
 import com.conexion.Conexion;
-import com.pojo.Cliente;
 import com.pojo.Nota;
-import com.pojo.Usuario;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,144 +9,40 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-
-public class NotaDAO implements DAO <Nota>{
+public class NotaDAO implements DAO<Nota> 
+{
+    Conexion conexion= Conexion.getConexion();
     
-    Conexion conexion = Conexion.getConexion();
+    private static String LEERULTIMO= "Select * from notas order by folio desc limit 1";
+    private static String INSERTAR="insert into notas(fecharecepcion,fechaentrega,login,id_cliente,imei,modelo,total,anticipo,resto,observaciones)"+
+           " values(curdate(), date_format(?, get_format(date, 'ISO')),?,?,?,?,?,?,?,?);";
+    private static String LEERIND= "Select * from notas where folio= ?";
+    private static final String SQL_READCLIENTES= "select a.folio, a.fecharecepcion, a.fechaentrega, a.login, a.id_cliente, a.imei,a.modelo, a.total, a.anticipo, b.descripcion, c.descripcion, "
+            + " a.observaciones, a.obsreparacion from notas as a inner join cestatusnota as b on a.id_estatusnota= b.id_estatusnota "
+            + " inner join cestatusreparacion as c on a.id_estatusreparacion= c.id_estatusreparacion where id_cliente=?;";
     
-    private static final String SQL_CREATE= "INSERT INTO notas (folio, fecharecepcion, fechaentrega, login, id_cliente, imei, total, anticipo, resto,observaciones,modelo)" +
-                                        " VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-    private static final String SQL_READULTIMOF = "Select * from notas order by folio desc limit 1" ;
-    private static final String SQL_READ= "select * from notas where folio= ?";
-    private static final String SQL_READCLIENTES= "select * from notas where id_cliente= ?";
-    private static final String SQL_READFECHAS= "select * from notas where fecharecepcion= ? AND f";
-    private static final String SQL_READALL= "select * from notas";
-    private static final String SQL_UPDATE= "update notas set estatusnota=?, estatusreparacion=?, obsreparacion=?"
-            + " where folio=?";
-    private static final String SQL_DELETE= "delete from notas where folio=?";
-
-    
-    @Override
-    public boolean create(Nota n) 
-    {
+    public Nota leerIndividual(int folio){
         PreparedStatement ps;
+            Nota n= null;
+            ResultSet rs;
         
         try {
-            ps = conexion.getCc().prepareStatement(SQL_CREATE);
-            ps.setInt(1, n.getFolio());
-            ps.setString(2, n.getFecharecibido());
-            ps.setString(3, n.getFechaentrega());
-            ps.setString(4, n.getU().getLogin());
-            ps.setInt(5, n.getE().getId());
-            ps.setString(6, n.getImei());
-            ps.setDouble(7, n.getTotal());
-            ps.setDouble(8, n.getAnticipo());
-            ps.setDouble(9, n.getResta());
-            ps.setString(10, n.getObservaciones());
-            ps.setString(11, n.getModelo());
-            if (ps.executeUpdate()>0)
-            {
-                return true;
-            }  
-        } catch (SQLException ex) {
-            Logger.getLogger(NotaDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }finally {
-            conexion.cerrarConexion();
-        }
-     return false;
-    }
-    
-    public Nota readUltimo() {
-            PreparedStatement ps;
-            ResultSet rs;
-            Nota nota = null;
-        try {
-            ps= conexion.getCc().prepareStatement(SQL_READULTIMOF);
+            ps= conexion.getCc().prepareStatement(LEERIND);
+            ps.setInt(1, folio);
             rs= ps.executeQuery();
             while (rs.next())
             {
-               nota = new Nota(rs.getInt("folio"), rs.getString(2), rs.getString(3), rs.getString(4),
-               rs.getInt(5), rs.getString(6), rs.getDouble(7), rs.getDouble(8), rs.getDouble(9), 
-               rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13), rs.getString(14));
+                n= new Nota(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getString(4),rs.getInt(5),rs.getString(6),rs.getString(7),rs.getDouble(8),  
+                        rs.getDouble(9), rs.getInt(11), rs.getInt(12),rs.getString(13),rs.getString(14));
             }
-            return nota;
+            return n;
         } catch (SQLException ex) {
             Logger.getLogger(NotaDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
+        } finally{
             conexion.cerrarConexion();
         }
-        return nota;
+        return n; 
     }
-
-      public Nota readi(Object key) {
-            PreparedStatement ps;
-            ResultSet rs;
-            Nota nota = null;
-        try {
-            ps= conexion.getCc().prepareStatement(SQL_READ);
-            ps.setString(1, key.toString());
-            rs= ps.executeQuery();
-            while (rs.next())
-            {
-               nota = new Nota(rs.getInt("folio"), rs.getString(2), rs.getString(3), rs.getString(4),
-               rs.getInt(5), rs.getString(6), rs.getDouble(7), rs.getDouble(8), rs.getDouble(9), 
-               rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13), rs.getString(14));
-            }
-            return nota;
-        } catch (SQLException ex) {
-            Logger.getLogger(NotaDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
-            conexion.cerrarConexion();
-        }
-        return nota;
-    }
-    
-    
-    @Override
-    public boolean update(Nota n) 
-    {
-        PreparedStatement ps;
-        try {
-           
-            ps =conexion.getCc().prepareStatement(SQL_UPDATE);
-            
-            ps.setString(1, n.getEstatusNota());
-            ps.setString(2, n.getEstatusReparacion());
-            ps.setString(3, n.getObsreparacion());
-            ps.setInt(4, n.getFolio());
-
-            if (ps.executeUpdate()>0)
-            {    
-                return true;
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(NotaDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }finally{
-            conexion.cerrarConexion();
-        }
-        return false;
-    }
-
-    @Override
-    public boolean delete(Object key) {
-        
-       PreparedStatement ps;
-        try {            
-            ps= conexion.getCc().prepareStatement(SQL_DELETE);
-            ps.setString(1, key.toString());
-            
-            if (ps.executeUpdate()>0)
-            {
-                return true;
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(NotaDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            conexion.cerrarConexion();
-        }
-        return false;
-    
-                }
     
     public ArrayList<Nota> readPorCliente(int id_cliente)
     {
@@ -160,61 +53,85 @@ public class NotaDAO implements DAO <Nota>{
             ps= conexion.getCc().prepareStatement(SQL_READCLIENTES);
             ps.setInt(1, id_cliente);
             rs= ps.executeQuery();
-            
             while (rs.next())
             {
-                notas.add(new Nota(rs.getInt("folio"), rs.getString(2), rs.getString(3), rs.getString(4),
-                        rs.getInt(5), rs.getString(6), rs.getDouble(7), rs.getDouble(8), rs.getDouble(9),
-                        rs.getString(10), rs.getString(11), rs.getString(12), rs.getString(13), rs.getString(14)));
+                notas.add(new Nota(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getString(4),rs.getInt(5),rs.getString(6),rs.getString(7),rs.getDouble(8),  
+                        rs.getDouble(9), rs.getString(10),rs.getString(11), rs.getString(12),rs.getString(13)));
             }
-        } catch (SQLException ex) {
+             } catch (SQLException ex) {
             Logger.getLogger(NotaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return notas;
     }
-
-    @Override
-    public ArrayList<Nota> read(Object key) {
-       /* PreparedStatement ps;
-            ArrayList<Nota> n= new ArrayList();
+    
+    public Nota leerultimo() {
+        PreparedStatement ps;
+            Nota n= null;
             ResultSet rs;
         try {
-            ps= conexion.getCc().prepareStatement(SQL_READ);
-            ps.setString(1, key.toString());
+            ps= conexion.getCc().prepareStatement(LEERULTIMO);
             rs= ps.executeQuery();
             while (rs.next())
             {
-                n.add(new Nota(rs.getInt(1), new Usuario(rs.getString(3)), new Cliente(rs.getInt(4)), rs.getString(6),
-                        rs.getString(7), rs.getDouble(5)));
+                n= new Nota(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7), rs.getDouble(8),rs.getDouble(9), rs.getDouble(10),rs.getInt(11),rs.getInt(12),
+                        rs.getString(13), rs.getString(14));    
+            }
+            return n;
+        } catch (SQLException ex) {
+            Logger.getLogger(NotaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            
+            conexion.cerrarConexion();
+        }
+        return n;
+    }
+    
+    @Override
+    public boolean create(Nota n) {
+        PreparedStatement ps;
+            
+        try {
+            ps = conexion.getCc().prepareStatement(INSERTAR);
+            ps.setString(1, n.getFechaentrega());
+            ps.setString(2, n.getU().getLogin());
+            ps.setInt(3, n.getC().getId());
+            ps.setString(4, n.getImei());
+            ps.setString(5, n.getModelo());
+            ps.setDouble(6, n.getTotal());
+            ps.setDouble(7, n.getAnticipo());
+            ps.setDouble(8, n.getResto());
+            ps.setString(9, n.getObservaciones());
+            
+            if (ps.executeUpdate()>0)
+            {
+                return true;
             }
         } catch (SQLException ex) {
             Logger.getLogger(NotaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
             conexion.cerrarConexion();
-        }*/
-        return null;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean update(Nota o) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean delete(Object key) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<Nota> read(Object key) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public ArrayList<Nota> readAll() {
-       /*    PreparedStatement ps;
-            ArrayList<Nota> notas =  new ArrayList();
-            ResultSet rs;
-        try {
-            ps = conexion.getCc().prepareStatement(SQL_READALL);
-            rs= ps.executeQuery();
-            
-            while (rs.next())
-            {
-                notas.add(new Nota(rs.getInt(1), new Usuario(rs.getString(3)), new Cliente(rs.getInt(4)), rs.getString(6),
-                        rs.getString(7), rs.getDouble(5)));
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(NotaDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }finally {
-            conexion.cerrarConexion();
-        }*/
-        return null;
-    }  
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

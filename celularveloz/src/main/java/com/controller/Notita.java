@@ -6,10 +6,14 @@
 package com.controller;
 
 import com.dao.ArticuloDAO;
+import com.dao.CestatusNotaDAO;
+import com.dao.CestatusReparacionDAO;
 import com.dao.ClienteDAO;
 import com.dao.NotaDAO;
 import com.dao.UsuarioDAO;
 import com.pojo.Articulo;
+import com.pojo.CestatusNota;
+import com.pojo.CestatusReparacion;
 import com.pojo.Cliente;
 import com.pojo.Nota;
 import com.pojo.Usuario;
@@ -22,10 +26,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author rubens
- */
 @WebServlet(name = "Notota", urlPatterns = {"/Administrador/nota.not"})
 public class Notita extends HttpServlet {
 
@@ -43,18 +43,26 @@ public class Notita extends HttpServlet {
         Usuario usuario=null;
         ArticuloDAO articulo= new ArticuloDAO();
         ArrayList <Nota> anotas;
+        CestatusNotaDAO cen= new CestatusNotaDAO();
+        CestatusNota cenn= null;
+        CestatusReparacionDAO cer= new CestatusReparacionDAO();
+        CestatusReparacion cerr= null;
         
             if (criterio.equalsIgnoreCase("Folio")) 
             {
                 int folion= Integer.parseInt(request.getParameter("folion"));
-                nota= notas.readi(folion);
-                cliente= clientes.readi(nota.getId_usuario());
+                nota= notas.leerIndividual(folion);
+                cliente= clientes.readi(nota.getId_cliente());
                 usuario= usuarios.login(nota.getLogin());
                 ArrayList<Articulo>articulos= articulo.read(nota.getFolio());
+                cenn= cen.busquedas(nota.getId_estatusnota());
+                cerr= cer.busquedas(nota.getId_estatusreparacion());
                 session.setAttribute("nota",nota);
                 session.setAttribute("usuario", usuario);
                 session.setAttribute("cliente", cliente);
                 session.setAttribute("articulos", articulos);
+                session.setAttribute("cenn", cenn);
+                session.setAttribute("cerr", cerr);
                 response.sendRedirect("resultadon.jsp");
             }else if (criterio.equalsIgnoreCase("nombre del cliente")) 
             {
@@ -63,8 +71,6 @@ public class Notita extends HttpServlet {
                 cliente= clientes.readinombre(nombre, apellido);              
                 anotas= notas.readPorCliente(cliente.getId());
                 ArrayList<ArrayList<Articulo>> articulos= new ArrayList();
-                
-                
                 for (Nota a : anotas) 
                 {
                     articulos.add(articulo.read(a.getFolio()));

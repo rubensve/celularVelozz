@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author rubens
  */
-@WebServlet(name = "Finalizar", urlPatterns = {"/Administrador/fina.fin"})
+/*@WebServlet(name = "Finalizar", urlPatterns = {"/Administrador/fina.fin"})
 public class Finalizado extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -54,3 +54,4 @@ public class Finalizado extends HttpServlet {
         
     }
 }
+*/

@@ -11,10 +11,10 @@ import java.util.logging.Logger;
 
 public class ArticuloDAO implements DAO<Articulo> {
 
-    private final String SQL_CREATE= "insert into articulosnota (folio, cantidad, descripcion, precio) "
+    private final String SQL_CREATE= "insert into detallesnota (folio, cantidad, descripcion, precio) "
             + "values(?,?,?,?) ";
-    private final String SQL_READ= "select * from articulosnota where folio = ? ";
-    private final String SQL_DELETE= "delete from articulosnota where folio = ? ";
+    private final String SQL_READ= "select * from detallesnota where folio = ? ";
+    private final String SQL_DELETE= "delete from detallesnota where folio = ? ";
     
   
     Conexion conexion= Conexion.getConexion();

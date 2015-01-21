@@ -32,7 +32,7 @@ public class Ventica extends HttpServlet {
     ClienteDAO cliente= new ClienteDAO();
     clientes= cliente.readAll();
     NotaDAO notas = new NotaDAO();
-    Nota nota = notas.readUltimo();
+    Nota nota = notas.leerultimo();
     session.setAttribute("nota", nota);
     session.setAttribute("clientes", clientes);
     

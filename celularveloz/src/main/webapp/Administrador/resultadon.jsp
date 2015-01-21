@@ -73,7 +73,7 @@
                                     <div class="row">
                                         
                                         <div class="col-md-4">
-                                            <p class="text-muted">Fecha de Recepcion: </p><p class="text-success">${nota.fecharecibido}</p>
+                                            <p class="text-muted">Fecha de Recepcion: </p><p class="text-success">${nota.fecharecepcion}</p>
                                         </div>
                                         
                                         <div class="col-md-4">
@@ -133,11 +133,11 @@
                                         <div class="row">
                                            
                                             <div class="col-md-3">
-                                              <p class="text-muted">Estatus Nota: </p><p class="text-success">${nota.estatusNota}</p>   
+                                              <p class="text-muted">Estatus Nota: </p><p class="text-success">${cenn.descripcion}</p>   
                                             </div>
                                             
                                             <div class="col-md-3">
-                                              <p class="text-muted">Estatus Reparacion: </p><p class="text-success">${nota.estatusReparacion}</p> 
+                                              <p class="text-muted">Estatus Reparacion: </p><p class="text-success">${cerr.descripcion}</p> 
                                             </div>
                                             
                                             <div class="col-md-3">
