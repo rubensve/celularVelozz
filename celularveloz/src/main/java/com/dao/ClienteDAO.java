@@ -136,7 +136,7 @@ public class ClienteDAO implements DAO <Cliente> {
             rs= ps.executeQuery();
             while (rs.next())
             {
-                c= new Cliente(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getString(4));    
+                c= new Cliente(rs.getInt(1),rs.getString(2), rs.getString(3), rs.getString(5));    
             }
             return c;
         } catch (SQLException ex) {

@@ -19,28 +19,28 @@ public class NotaDAO implements DAO<Nota>
     private static String LEERIND= "Select * from notas where folio= ? and activo='si'";
     private static final String SQL_READCLIENTES= "select a.folio, a.fecharecepcion, a.fechaentrega, a.login, a.id_cliente, a.imei,a.modelo, a.total, a.anticipo, b.descripcion, c.descripcion, "
             + " a.observaciones, a.obsreparacion from notas as a inner join cestatusnota as b on a.id_estatusnota= b.id_estatusnota "
-            + " inner join cestatusreparacion as c on a.id_estatusreparacion= c.id_estatusreparacion where id_cliente=? and a.activo='si';";
+            + " inner join cestatusreparacion as c on a.id_estatusreparacion= c.id_estatusreparacion where id_cliente=? and a.activo='si' ORDER BY a.folio asc;";
     private static final String SQL_READFECHAS= "select a.folio, a.fecharecepcion, a.fechaentrega, d.nombre, d.apellido, e.nombre, e.apellido, e.telefono, a.imei, a.modelo, "
             + "a.total, a.anticipo,  b.descripcion, c.descripcion, a.observaciones, a.obsreparacion from notas as a inner join cestatusnota as b on  "
             + "a.id_estatusnota= b.id_estatusnota inner join usuarios as d on a.login= d.login inner join clientes as e on a.id_cliente = e.id_cliente inner join "
-            + "cestatusreparacion as c on a.id_estatusreparacion= c.id_estatusreparacion where fecharecepcion >= ? AND fecharecepcion<= ? AND a.activo='si';";
+            + "cestatusreparacion as c on a.id_estatusreparacion= c.id_estatusreparacion where fecharecepcion >= ? AND fecharecepcion<= ? AND a.activo='si' ORDER BY a.folio asc;";
     
     private static final String SQL_READTODAS= "select a.folio, a.fecharecepcion, a.fechaentrega, d.nombre, d.apellido, e.nombre, e.apellido, e.telefono, a.imei, a.modelo, "
             + "a.total, a.anticipo,  b.descripcion, c.descripcion, a.observaciones, a.obsreparacion from notas as a inner join cestatusnota as b on  "
             + "a.id_estatusnota= b.id_estatusnota inner join usuarios as d on a.login= d.login inner join clientes as e on a.id_cliente = e.id_cliente inner join "
-            + "cestatusreparacion as c on a.id_estatusreparacion= c.id_estatusreparacion where a.activo='si'";
+            + "cestatusreparacion as c on a.id_estatusreparacion= c.id_estatusreparacion where a.activo='si' ORDER BY a.folio asc";
     
     private static final String SQL_ACTUALIZARNOTAS="update notas set id_estatusnota=?, id_estatusreparacion=?, obsreparacion=? where folio=?;";
     
     private static final String SQL_ELIMINARNOTAS= "update notas set activo='no' where folio=?";
     
-    private static final String SQL_NOTASFECHA= "select folio,fecharecepcion,fechaentrega,total from notas where id_estatusnota=2 AND activo='si' AND fecharecepcion>=? AND fecharecepcion<=?;";
+    private static final String SQL_NOTASFECHA= "select folio,fecharecepcion,fechaentrega,total from notas where id_estatusnota=2 AND activo='si' AND fecharecepcion>=? AND fecharecepcion<=? ORDER BY folio asc;";
 
-    private static final String SQL_NOTASMES= "select folio, fecharecepcion, fechaentrega, total from notas where id_estatusnota=2 AND activo='si' AND  month(fecharecepcion)=?;";
+    private static final String SQL_NOTASMES= "select folio, fecharecepcion, fechaentrega, total from notas where id_estatusnota=2 AND activo='si' AND  month(fecharecepcion)=? ORDER BY folio asc;";
     
-    private static final String SQL_NOTASCANCELADAS= "Select folio, fecharecepcion, fechaentrega, total from notas where id_estatusnota=3 AND activo='si'";
+    private static final String SQL_NOTASCANCELADAS= "Select folio, fecharecepcion, fechaentrega, total from notas where id_estatusnota=3 AND activo='si' ORDER BY folio asc";
     
-    private static final String SQL_NOTASELIMINADAS= "Select folio, fecharecepcion, fechaentrega, total from notas where activo='no'";
+    private static final String SQL_NOTASELIMINADAS= "Select folio, fecharecepcion, fechaentrega, total from notas where activo='no' ORDER BY folio asc";
     
     
     public ArrayList<Nota> readCanceladas()

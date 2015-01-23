@@ -36,8 +36,9 @@ public class Notototas extends HttpServlet {
          articulos.add(articulo.read(nota.getFolio()));
         }
         
-        session.setAttribute("anotas", anotas);
-        session.setAttribute("articulos", articulos);
-        response.sendRedirect("resultadonottodas.jsp");
+        request.setAttribute("anotas", anotas);
+        request.setAttribute("articulos", articulos);
+        request.getRequestDispatcher("resultadonottodas.jsp").forward(request, response);
+//response.sendRedirect("resultadonottodas.jsp");
     }
 }

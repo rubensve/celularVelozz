@@ -20,6 +20,7 @@
     <body>  
         
         <%@include file="/log.jspf" %>
+        <p align="center"><a href="http://www.freepik.es/vector-gratis/fondo-de-cuadrados-blancos_760926.htm">Fondo diseñado por Freepik</a></p>
 
     </body>
     <script src="js/libs/jquery/jquery.js"></script>

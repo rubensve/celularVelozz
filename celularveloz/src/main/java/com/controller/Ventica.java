@@ -34,14 +34,9 @@ public class Ventica extends HttpServlet {
     clientes= cliente.readAll();
     NotaDAO notas = new NotaDAO();
     Nota nota = notas.leerultimo();
-    //int cantidad=0;
-    ArrayList<Articulo> articulos= (ArrayList<Articulo>)session.getAttribute("articulos");
     
     session.setAttribute("nota", nota);
     session.setAttribute("clientes", clientes);
-    //session.setAttribute("articulos", articulos);
-    //cantidad.setAttribute("cantidad", cantidad);
     response.sendRedirect("ventas.jsp");
-    //request.getRequestDispatcher("ventas.jsp").forward(request, response);
     }
 }

@@ -224,8 +224,8 @@
                                                       <c:forEach items="${detallearticulos}" var="detallearticulos">
                                                       <tr>
                                                       <td>${detallearticulos.cantidad}</td>
-                                                      <td><${detallearticulos.descripcion}</td>
-                                                      <td><${detallearticulos.costo}</td>
+                                                      <td>${detallearticulos.descripcion}</td>
+                                                      <td>${detallearticulos.costo}</td>
                                                       </tr>
                                                         </c:forEach>
                                             </tbody>
