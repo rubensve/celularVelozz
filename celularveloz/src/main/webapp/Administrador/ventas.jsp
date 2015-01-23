@@ -193,7 +193,7 @@
                                         <div class="form-group">
                                         <label>Descripción: </label>
                                         <div class="col-md-11">
-                                        <input type="text" class="form-control"
+                                        <input type="text" class="form-control" 
                                         placeholder="Descripción" name="descrip"/> 
                                         </div>
                                         </div>
@@ -221,11 +221,11 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                      <c:forEach items="${articulos}" var="articulos">
+                                                      <c:forEach items="${detallearticulos}" var="detallearticulos">
                                                       <tr>
-                                                      <td><c:out value="${articulos.cantidad}"/></td>
-                                                      <td><c:out value="${articulos.descripcion}"/></td>
-                                                      <td><c:out value="${articulos.costo}"/></td>
+                                                      <td>${detallearticulos.cantidad}</td>
+                                                      <td><${detallearticulos.descripcion}</td>
+                                                      <td><${detallearticulos.costo}</td>
                                                       </tr>
                                                         </c:forEach>
                                             </tbody>

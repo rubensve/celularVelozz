@@ -56,31 +56,29 @@ public class Registreishon extends HttpServlet {
         HttpSession sesion = request.getSession();
         Usuario u = (Usuario) sesion.getAttribute("usuario");
         sesion.setAttribute("usuario", u);
-        ArrayList<Articulo> articulos;
+        ArrayList<Articulo> detallearticulos;
         NotaDAO nota = new NotaDAO();
         ArticuloDAO articulo = new ArticuloDAO();
         ClienteDAO cliente = new ClienteDAO();
-        int cantidad=0;
-        String descripcion="";
-        double precio=0.0;
         
-        if (sesion.getAttribute("articulos")==null) 
+        if (sesion.getAttribute("detallearticulos")==null) 
                 {
-                 articulos = new ArrayList();
+                 detallearticulos = new ArrayList();
                   
                 }
                 else{
-                articulos= (ArrayList<Articulo>) sesion.getAttribute("articulos");
+                detallearticulos= (ArrayList<Articulo>) sesion.getAttribute("detallearticulos");
                 }
 
         try
         {
             if (request.getParameter("Agregar")!=null)
             {
+                try{
                 int folio = Integer.parseInt(request.getParameter("folio"));
-                cantidad= Integer.parseInt(request.getParameter("cantid"));
-                descripcion = request.getParameter("descrip");
-                precio = Double.parseDouble(request.getParameter("prec"));
+                int cantidad= Integer.parseInt(request.getParameter("cantid"));
+                String descripcion = request.getParameter("descrip");
+                double precio = Double.parseDouble(request.getParameter("prec"));
                 imei = request.getParameter("imei");
                 fechaentrega = request.getParameter("fechaentrega");
                 int id_cliente= Integer.parseInt(request.getParameter("clientestodos"));
@@ -92,15 +90,19 @@ public class Registreishon extends HttpServlet {
                 sesion.setAttribute("modelo", modelo);
                 sesion.setAttribute("observacion", observacion);
                 sesion.setAttribute("cl", cl);
-                articulos.add(new Articulo(new Nota(folio),cantidad, descripcion, precio)); 
-
+                detallearticulos.add(new Articulo(new Nota(folio),cantidad, descripcion, precio)); 
+                }
+                catch(Exception e)
+                {
+                 response.sendRedirect("ventas.jsp");
+                }
             }
             else if(request.getParameter("eliminar")!=null)
             {
-                if (articulos.size()>0) 
+                if (detallearticulos.size()>0) 
                 {
-                 int ultimo = articulos.size() -1;
-                 articulos.remove(ultimo);
+                 int ultimo = detallearticulos.size() -1;
+                 detallearticulos.remove(ultimo);
                 }
                     
             } else if (request.getParameter("Finalizar")!=null)
@@ -121,12 +123,12 @@ public class Registreishon extends HttpServlet {
                        totalv, anticipo, (totalv-anticipo), observacion));
                
                
-                for (Articulo a : articulos) 
+                for (Articulo a : detallearticulos) 
                 {
                     articulo.create(new Articulo(new Nota(folio), a.getCantidad(), a.getDescripcion(), a.getCosto()));
                 }
                 
-                    articulos.clear();
+                    detallearticulos.clear();
                     imei="";
                     fechaentrega="";
                     modelo="";
@@ -147,7 +149,7 @@ public class Registreishon extends HttpServlet {
                 sesion.setAttribute("validar", validar);
 
                 try {
-                        Document documento = new Document(new Rectangle(227,360),16, 16,16,16);
+                        Document documento = new Document(new Rectangle(227,360),16,16,16,16);
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
                         PdfWriter.getInstance(documento, baos);
                         // step 3
@@ -257,11 +259,11 @@ public class Registreishon extends HttpServlet {
               request.setAttribute("mensaje", mensaje);
               
           }finally {
-                        for (Articulo a: articulos) 
+                        for (Articulo a: detallearticulos) 
                         {
                         total = total + a.getCosto();
                         }
-                        sesion.setAttribute("articulos", articulos);
+                        sesion.setAttribute("detallearticulos", detallearticulos);
                         sesion.setAttribute("total",total);
                         request.getRequestDispatcher("ventas.jsp").forward(request, response);
                 }                   

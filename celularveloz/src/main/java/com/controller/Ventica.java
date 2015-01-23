@@ -7,6 +7,7 @@ package com.controller;
 
 import com.dao.ClienteDAO;
 import com.dao.NotaDAO;
+import com.pojo.Articulo;
 import com.pojo.Cliente;
 import com.pojo.Nota;
 import java.io.IOException;
@@ -34,13 +35,13 @@ public class Ventica extends HttpServlet {
     NotaDAO notas = new NotaDAO();
     Nota nota = notas.leerultimo();
     //int cantidad=0;
+    ArrayList<Articulo> articulos= (ArrayList<Articulo>)session.getAttribute("articulos");
+    
     session.setAttribute("nota", nota);
     session.setAttribute("clientes", clientes);
+    //session.setAttribute("articulos", articulos);
     //cantidad.setAttribute("cantidad", cantidad);
     response.sendRedirect("ventas.jsp");
     //request.getRequestDispatcher("ventas.jsp").forward(request, response);
-        
-        
-    
     }
 }
