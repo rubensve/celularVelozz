@@ -24,6 +24,18 @@
         <title>Administrador</title>
     </head>
     <body>
+        <input type="text" name="alerta1" id="alerta1" value="${requestScope.mensaje}" hidden> 
+        <script>
+            var mensaje= document.getElementById("alerta1").value;
+            if (mensaje==null || mensaje=="") 
+            {
+                
+            }
+            else{
+                alert(mensaje);
+            }
+           
+        </script>
         <div id="wrapper">
 
         <!-- Sidebar -->
@@ -48,7 +60,7 @@
                     <a href="busquedas.jsp">Consultas</a>
                 </li>
                 <li>
-                    <a href="#">Reportes</a>
+                    <a href="reportes.jsp">Reportes</a>
                 </li>
                 <li>
                     <a href="cierre.out">Salir</a>
@@ -156,12 +168,12 @@
                                 <div class="form-group">
                                 <label>Fecha Inicial</label>
                                 <input type="text" class="form-control" name="inicial"
-                                placeholder="dddd-mm-aaaa">
+                                placeholder="aaaa-mm-dd">
                                 </div>
                                 <div class="form-group">
                                 <label>Fecha Final:</label>
                                 <input type="text" class="form-control" name="final"
-                                placeholder="dddd-mm-aaaa">
+                                placeholder="aaaa-mm-dd">
                                 </div>
                                 <p class="help-block">Busqueda de Nota por Fecha.</p>
                                 <button type="submit" class="btn btn-lg btn-success">Buscar</button>

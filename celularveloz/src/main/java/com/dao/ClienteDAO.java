@@ -12,11 +12,11 @@ import java.util.logging.Logger;
 public class ClienteDAO implements DAO <Cliente> {
 
     Conexion conexion = Conexion.getConexion();
-    private static final String SQL_CREATE= "insert into clientes(nombre,apellido,telefono) "
-            + "values(?,?,?)";
+    private static final String SQL_CREATE= "insert into clientes(nombre,apellido,nombrecompleto, telefono) "
+            + "values(?,?,concat(nombre,' ',apellido),?)";
     private static final String SQL_READI= "select * from clientes where id_cliente= ?";
     private static final String SQL_READINOMBRE= "select * from clientes where nombre=? AND apellido=?";
-    private static final String SQL_READ= "select * from clientes where nombre= ?";
+    private static final String SQL_READ= "SELECT * FROM clientes WHERE nombrecompleto LIKE ?";
     private static final String SQL_READALL= "select * from clientes";
     private static final String SQL_UPDATE= "update clientes set nombre=?, apellido=?, telefono=? where id_cliente=?";
     private static final String SQL_DELETE= "delete from clientes where id_cliente=?";
@@ -92,11 +92,11 @@ public class ClienteDAO implements DAO <Cliente> {
         ResultSet rs;
         try {
             ps = conexion.getCc().prepareStatement(SQL_READ);
-            ps.setString(1, key.toString());
+            ps.setString(1, "%"+key.toString()+"%");
             rs= ps.executeQuery();
             while (rs.next())
             {
-                c.add(new Cliente(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+                c.add(new Cliente(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(5)));
             }
             return c;
         } catch (SQLException ex) {
@@ -116,7 +116,7 @@ public class ClienteDAO implements DAO <Cliente> {
             
             while (rs.next())
             {
-                clientes.add(new Cliente(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+                clientes.add(new Cliente(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(5)));
             }
         } catch (SQLException ex) {
             Logger.getLogger(ClienteDAO.class.getName()).log(Level.SEVERE, null, ex);

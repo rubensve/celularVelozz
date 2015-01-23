@@ -48,7 +48,7 @@
                     <a href="busquedas.jsp">Consultas</a>
                 </li>
                 <li>
-                    <a href="#">Reportes</a>
+                    <a href="reportes.jsp">Reportes</a>
                 </li>
                 <li>
                    <a href="cierre.out">Salir</a>

@@ -1,8 +1,9 @@
 <%-- 
-    Document   : resultadoc
-    Created on : 13/11/2014, 03:16:40 PM
+    Document   : totales
+    Created on : 22/01/2015, 08:51:10 PM
     Author     : rubens
 --%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -68,19 +69,19 @@
                             <table border="0" class="table table-hover table-responsive" >
                                 <thead>
                                     <tr>
-                                        <th>ID Cliente</th>
-                                        <th>Nombre</th>
-                                        <th>Apellido</th>
-                                        <th>Telefono</th>
+                                        <th>Folio</th>
+                                        <th>Fecha de Recepcion</th>
+                                        <th>Fecha de Entrega</th>
+                                        <th>Total</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                          <c:forEach items="${clientes}" var="clientes">
+                                          <c:forEach items="${notas}" var="nota">
                                           <tr>
-                                          <td><c:out value="${clientes.id}"/></td>
-                                          <td><c:out value="${clientes.nombre}"/></td>
-                                          <td><c:out value="${clientes.apellido}"/></td>
-                                          <td><c:out value="${clientes.telefono}"/></td>
+                                          <td><c:out value="${nota.folio}"/></td>
+                                          <td><c:out value="${nota.fecharecepcion}"/></td>
+                                          <td><c:out value="${nota.fechaentrega}"/></td>
+                                          <td><c:out value="${nota.total}"/></td>
                                           </tr>
                                             </c:forEach>
                                 </tbody>

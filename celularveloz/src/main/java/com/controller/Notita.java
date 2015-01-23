@@ -47,9 +47,10 @@ public class Notita extends HttpServlet {
         CestatusNota cenn= null;
         CestatusReparacionDAO cer= new CestatusReparacionDAO();
         CestatusReparacion cerr= null;
-        
+        String mensaje;
             if (criterio.equalsIgnoreCase("Folio")) 
             {
+                try{
                 int folion= Integer.parseInt(request.getParameter("folion"));
                 nota= notas.leerIndividual(folion);
                 cliente= clientes.readi(nota.getId_cliente());
@@ -64,8 +65,16 @@ public class Notita extends HttpServlet {
                 session.setAttribute("cenn", cenn);
                 session.setAttribute("cerr", cerr);
                 response.sendRedirect("resultadon.jsp");
+                }
+                catch(Exception e)
+                {
+                mensaje="El numero de folio no existe, intente nuevamente";
+                request.setAttribute("mensaje", mensaje);
+                request.getRequestDispatcher("busquedas.jsp").forward(request, response);
+                }
             }else if (criterio.equalsIgnoreCase("nombre del cliente")) 
             {
+                try{
                 String nombre = request.getParameter("nombre");
                 String apellido = request.getParameter("apellido");
                 cliente= clientes.readinombre(nombre, apellido);              
@@ -80,12 +89,39 @@ public class Notita extends HttpServlet {
                 session.setAttribute("cliente", cliente);
                 session.setAttribute("articulos", articulos);
                 response.sendRedirect("resultadont.jsp");
-                
+                }
+                catch(Exception e)
+                {
+                 mensaje= "El cliente ingresado no existe, intente nuevamente";
+                 request.setAttribute("mensaje", mensaje);
+                 request.getRequestDispatcher("busquedas.jsp").forward(request, response);
+                }
             }
             else if (criterio.equalsIgnoreCase("fecha")) 
             {
+                try{
+                String inicial= request.getParameter("inicial");
+                String finals= request.getParameter("final");
                 
-            }
+                anotas= notas.readPorFecha(inicial, finals);
+                ArrayList<ArrayList<Articulo>> articulos= new ArrayList();
+                
+                for (Nota a : anotas) 
+                {
+                    articulos.add(articulo.read(a.getFolio()));
+                }
+                
+                session.setAttribute("anotas", anotas);
+                session.setAttribute("articulos", articulos);
+                response.sendRedirect("resultadonta.jsp");
+                }
+                catch(Exception e)
+                {
+                 mensaje="La fecha ingresada es incorrecta, intente nuevamente";
+                 request.setAttribute("mensaje", mensaje);
+                 request.getRequestDispatcher("busquedas.jsp").forward(request, response);
+                }
+                }
         }catch(Exception e){
             System.out.println("Aqui anda mal algo");
         }

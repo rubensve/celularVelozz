@@ -39,7 +39,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author rubens
  */
 
-/*
+
 @WebServlet(name = "Reimprimision", urlPatterns = {"/Administrador/reimpr.pdf"})
 public class Imprimision extends HttpServlet {
 
@@ -51,9 +51,9 @@ public class Imprimision extends HttpServlet {
        int folion= Integer.parseInt(request.getParameter("folion"));
       
        NotaDAO nota= new NotaDAO();
-       Nota notas= nota.readi(folion);
+       Nota notas= nota.leerIndividual(folion);
        
-       int id_cliente = notas.getId_usuario();
+       int id_cliente = notas.getId_cliente();
        ClienteDAO cliente= new ClienteDAO();
        Cliente c = cliente.readi(id_cliente);
        ArticuloDAO articulo= new ArticuloDAO();
@@ -94,7 +94,7 @@ public class Imprimision extends HttpServlet {
                                 FontFactory.getFont("Courier", 16, Font.BOLDITALIC)));
                         
                         documento.add(new Paragraph("Atendio:" + u.getNombre() + " " + u.getApellido()
-                                + " Recibido:" +notas.getFecharecibido() ,
+                                + " Recibido:" +notas.getFecharecepcion() ,
                                 FontFactory.getFont("Courier", 7)));
                         documento.add(new Paragraph("Cliente:" + c.getNombre() + " " + c.getApellido()
                                 + " Entrega:" +notas.getFechaentrega(),
@@ -123,7 +123,7 @@ public class Imprimision extends HttpServlet {
                         documento.add(new Paragraph("Observaciones:"+ notas.getObservaciones(),
                          FontFactory.getFont("Courier", 7)));  
                          documento.add(new Paragraph("Total:"+notas.getTotal()+" Anticipo:" + 
-                                 notas.getAnticipo()+" Adeudo:"+ notas.getResta(),
+                                 notas.getAnticipo()+" Adeudo:"+ notas.getResto(),
                          FontFactory.getFont("Courier", 8)));      
                          Chunk nl = new Chunk(NEWLINE);
                          documento.add(nl);
@@ -171,4 +171,3 @@ public class Imprimision extends HttpServlet {
       
         }
 }
-*/

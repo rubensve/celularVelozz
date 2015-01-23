@@ -7,6 +7,7 @@ package com.controller;
 
 import com.dao.ArticuloDAO;
 import com.dao.NotaDAO;
+import com.pojo.Nota;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,15 +26,14 @@ public class EliminacionNota extends HttpServlet {
             throws ServletException, IOException {
    
     String mensaj;
-     try{
+    try{
     int folion= Integer.parseInt(request.getParameter("folion"));
     NotaDAO nota= new NotaDAO();
-    ArticuloDAO articulo = new ArticuloDAO();
+   // ArticuloDAO articulo = new ArticuloDAO();
     
-    boolean veri1= articulo.delete(folion);
-    boolean veri2= nota.delete(folion);
+    boolean veri2= nota.eliminar(new Nota(folion));
     
-         if ( veri1 && veri2)
+         if ( veri2)
          {
           mensaj= "La nota se ha eliminado con exito";
           request.setAttribute("mensaj", mensaj);
@@ -44,16 +44,10 @@ public class EliminacionNota extends HttpServlet {
              request.setAttribute("mensaj", mensaj);
              request.getRequestDispatcher("notas.jsp").forward(request, response);
          }
-    
-    
-    
      }catch(Exception e){
              mensaj="El folio de nota no existe, introducir nuevamente";
              request.setAttribute("mensaj", mensaj);
              request.getRequestDispatcher("notas.jsp").forward(request, response);
      }
-    
-    
-    
     }
 }

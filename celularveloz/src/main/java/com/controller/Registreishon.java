@@ -60,7 +60,9 @@ public class Registreishon extends HttpServlet {
         NotaDAO nota = new NotaDAO();
         ArticuloDAO articulo = new ArticuloDAO();
         ClienteDAO cliente = new ClienteDAO();
-        
+        int cantidad=0;
+        String descripcion="";
+        double precio=0.0;
         
         if (sesion.getAttribute("articulos")==null) 
                 {
@@ -76,9 +78,9 @@ public class Registreishon extends HttpServlet {
             if (request.getParameter("Agregar")!=null)
             {
                 int folio = Integer.parseInt(request.getParameter("folio"));
-                int cantidad= Integer.parseInt(request.getParameter("cantid"));
-                String descripcion = request.getParameter("descrip");
-                double precio = Double.parseDouble(request.getParameter("prec"));
+                cantidad= Integer.parseInt(request.getParameter("cantid"));
+                descripcion = request.getParameter("descrip");
+                precio = Double.parseDouble(request.getParameter("prec"));
                 imei = request.getParameter("imei");
                 fechaentrega = request.getParameter("fechaentrega");
                 int id_cliente= Integer.parseInt(request.getParameter("clientestodos"));

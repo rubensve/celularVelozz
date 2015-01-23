@@ -63,7 +63,7 @@
                     <a href="busquedas.jsp">Consultas</a>
                 </li>
                 <li>
-                    <a href="#">Reportes</a>
+                    <a href="reportes.jsp">Reportes</a>
                 </li>
                 <li>
                    <a href="cierre.out">Salir</a>
@@ -117,8 +117,8 @@
                                     <div class="form-group">
                                         <label>Reparacion:</label>  
                                         <select class="form-control" name="reparacion">
-                                            <option>Reparado</option>
-                                            <option>Sin reparacion</option>
+                                            <option value="1">Reparado</option>
+                                            <option value="2">Sin reparacion</option>
                                         </select>
                                   </div>
                                     </div>
@@ -127,9 +127,9 @@
                                     <div class="form-group">
                                         <label>Estado de Nota:</label>  
                                         <select class="form-control" name="estatusnota">
-                                            <option>Abierta</option>
-                                            <option>Pagada</option>
-                                            <option>Cancelada</option>
+                                            <option value="1">Abierta</option>
+                                            <option value="2">Pagada</option>
+                                            <option value="3">Cancelada</option>
                                         </select>
                                   </div>
                                     </div>

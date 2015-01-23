@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author rubens
  */
-/*@WebServlet(name = "Finalizar", urlPatterns = {"/Administrador/fina.fin"})
+@WebServlet(name = "Finalizar", urlPatterns = {"/Administrador/fina.fin"})
 public class Finalizado extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -24,10 +24,9 @@ public class Finalizado extends HttpServlet {
         
         try{
         int folio = Integer.parseInt(request.getParameter("folion"));
-        String estatusnota= request.getParameter("estatusnota");
-        String estatusreparacion = request.getParameter("reparacion");
+        int estatusnota= Integer.parseInt(request.getParameter("estatusnota"));
+        int estatusreparacion = Integer.parseInt(request.getParameter("reparacion"));
         String obsreparacion= request.getParameter("obsreparacion");
-        
        
         boolean veri= notas.update(new Nota(folio, estatusnota, estatusreparacion, obsreparacion));
         
@@ -54,4 +53,3 @@ public class Finalizado extends HttpServlet {
         
     }
 }
-*/
