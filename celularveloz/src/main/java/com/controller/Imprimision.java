@@ -62,83 +62,79 @@ public class Imprimision extends HttpServlet {
        Usuario u= usuario.login(notas.getLogin());
 
                 try {
-                        Document documento = new Document(new Rectangle(164.4f,300),14,14,14,14);
+                        Document documento = new Document(new Rectangle(164.4f,500),10,10,10,15);
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
                         PdfWriter.getInstance(documento, baos);
                         // step 3
-                        documento.open();
-                        Font titulos = new Font(Font.FontFamily.COURIER, 11, Font.BOLD);
-                        Font subtitulos = new Font(Font.FontFamily.COURIER,7, Font.BOLDITALIC
-                        );
+                         documento.open();
+                        Font titulos = new Font(Font.FontFamily.TIMES_ROMAN, 14, Font.BOLD);
                         Chunk encabezado = new Chunk("El Celular Veloz" , titulos);
-                        Chunk subencabezado = new Chunk(" La Nueva Tecnologia en Celular", subtitulos);
+                     
                         // step 4
                         Paragraph titulo= new Paragraph(encabezado);
-                        titulo.setAlignment(1);
-                        Paragraph subtitulo= new Paragraph(subencabezado);
-                        subtitulo.setAlignment(1);
                         documento.add(titulo);
-                        documento.add(subencabezado);
-                        documento.add(new Paragraph("   Rafael Veloz/Mireya Gutierrez ",
-                                FontFactory.getFont("Courier", 6)));
-                        documento.add(new Paragraph("Calle Rusia Mz.13 Lote 11 Col. Olimpica",
-                                FontFactory.getFont("Courier", 5)));
+                        documento.add(new Paragraph("La Nueva Tecnologia en Celular ",
+                                FontFactory.getFont("Arial", 7, Font.BOLDITALIC)));
+                        documento.add(new Paragraph("Rafael Veloz/Mireya Gutierrez\nTel: 6640-2906 ",
+                                FontFactory.getFont("Arial", 8, Font.BOLDITALIC)));
+                        documento.add(new Paragraph("C. Rusia Mz.13 L.11 Olimpica",
+                                FontFactory.getFont("Arial", 8, Font.BOLDITALIC)));
                       
-                        documento.add(new Paragraph("*Reparacion de Equipos y Venta de Accesorios ",
-                                FontFactory.getFont("Courier", 5)));
-                        documento.add(new Paragraph("     *Flexeos *Desbloqueos *Activaciones ",
+                        documento.add(new Paragraph("*Reparacion de Equipos \n*Venta de Accesorios ",
+                                FontFactory.getFont("Arial", 8, Font.BOLDITALIC)));
+                        /*documento.add(new Paragraph("     *Flexeos *Desbloqueos *Activaciones ",
                                 FontFactory.getFont("Courier", 5)));
                         documento.add(new Paragraph("       *Liberaciones *Carga de Software ",
-                                FontFactory.getFont("Courier", 5)));
+                                FontFactory.getFont("Courier", 5))); */
                         documento.add(new Paragraph("     Folio: "+ notas.getFolio(),
-                                FontFactory.getFont("Courier", 11, Font.BOLDITALIC)));
+                                FontFactory.getFont("Arial", 12, Font.BOLDITALIC)));
                         
                         documento.add(new Paragraph("Atendio:" + u.getNombre() + " " + u.getApellido()
-                                + " Recibido:" +notas.getFecharecepcion() ,
-                                FontFactory.getFont("Courier", 5)));
-                        documento.add(new Paragraph("Cliente:" + c.getNombre() + " " + c.getApellido()
-                                + " Entrega:" +notas.getFechaentrega(),
-                                FontFactory.getFont("Courier", 5)));
-                        documento.add(new Paragraph("Tel:" +c.getTelefono() +" Equipo:"+notas.getModelo() +" Imei:"+notas.getImei(),
-                                FontFactory.getFont("Courier", 5)));
-                        documento.add(new Paragraph("C.|           Concepto            |Precio ",
-                                FontFactory.getFont("Courier", 5)));
+                                + "\nRecibido:" +notas.getFecharecepcion() ,
+                                FontFactory.getFont("Arial", 8, Font.BOLD)));
+                        documento.add(new Paragraph("Cliente:" + c.getNombre() + " " + c.getApellido(),
+                                FontFactory.getFont("Arial", 8, Font.BOLD)));
+                        documento.add(new Paragraph("Tel:" +c.getTelefono() +"\nEquipo:"+notas.getModelo() +"\nImei:"+notas.getImei(),
+                                FontFactory.getFont("Arial", 8, Font.BOLD)));
+                        documento.add(new Paragraph("Detalles ",
+                                FontFactory.getFont("Arial", 8, Font.BOLD)));
                         
-                        final float columnas[] = {0.15f,1.5f,0.45f};
+                        final float columnas[] = {0.15f,0.9f,0.45f};
                         
                         PdfPTable productos = new PdfPTable(columnas);
-                        productos.setWidthPercentage(100);
+                        productos.setWidthPercentage(90);
                         productos.setHorizontalAlignment(Element.ALIGN_LEFT);
                         productos.getDefaultCell().setBorder(0);
                         for (Articulo ar : compras) 
                         {
                         productos.addCell(new Paragraph(String.valueOf(ar.getCantidad()),
-                                FontFactory.getFont("Courier", 6)));
+                                FontFactory.getFont("Arial", 8, Font.BOLD)));
                          productos.addCell(new Paragraph(ar.getDescripcion(),
-                                FontFactory.getFont("Courier", 6)));
+                                FontFactory.getFont("Arial", 8, Font.BOLD)));
                         productos.addCell(new Paragraph(String.valueOf(ar.getCosto()),
-                                FontFactory.getFont("Courier", 6)));
+                                FontFactory.getFont("Arial", 8, Font.BOLD)));
                         }
                         documento.add(productos);
-                        documento.add(new Paragraph("Observaciones:"+ notas.getObservaciones(),
-                         FontFactory.getFont("Courier", 5)));  
+                        documento.add(new Paragraph("Observaciones:\n"+ notas.getObservaciones(),
+                         FontFactory.getFont("Arial", 8, Font.BOLD)));  
                          documento.add(new Paragraph("Total:"+notas.getTotal()+" Anticipo:" + 
-                                 notas.getAnticipo()+" Adeudo:"+ notas.getResto(),
-                         FontFactory.getFont("Courier", 6)));      
+                                 notas.getAnticipo()+"\nAdeudo:"+ notas.getResto(),
+                         FontFactory.getFont("Arial", 8, Font.BOLD)));      
                          Chunk nl = new Chunk(NEWLINE);
                          documento.add(nl);
-                        documento.add(new Paragraph("En equipos mojados NO hay garantia.",
-                         FontFactory.getFont("Courier", 5)));  
-                        documento.add(new Paragraph("Despues de 30 dias NO se responde por "
-                                + "ningun trabajo.",
-                         FontFactory.getFont("Courier", 5))); 
-                        documento.add(new Paragraph("En sistemas de carga NO hay garantia.",
-                         FontFactory.getFont("Courier", 5)));  
-                        documento.add(new Paragraph("NO nos hacemos cargo de chips y memorias.",
-                         FontFactory.getFont("Courier", 5)));  
-                        documento.add(new Paragraph("La procedencia de los equipos es responsabilidad"
-                                + " del usuario.",
-                         FontFactory.getFont("Courier", 5)));  
+                        documento.add(new Paragraph("En equipos mojados \nNO hay garantia.",
+                         FontFactory.getFont("Arial", 8, Font.BOLD)));  
+                        documento.add(new Paragraph("Despues de 30 dias \nNO se responde por "
+                                + "\nningun trabajo.",
+                         FontFactory.getFont("Arial", 8, Font.BOLD))); 
+                        documento.add(new Paragraph("En sistemas de carga \nNO hay garantia.",
+                         FontFactory.getFont("Arial", 8, Font.BOLD)));  
+                        documento.add(new Paragraph("NO nos hacemos cargo \nDe chips y memorias.",
+                         FontFactory.getFont("Arial", 8, Font.BOLD)));  
+                        documento.add(new Paragraph("La procedencia de los\nEquipos es responsabilidad"
+                                + "\nDel usuario.",
+                         FontFactory.getFont("Arial", 8, Font.BOLD)));  
+                       
                        
                         
                         documento.close();
