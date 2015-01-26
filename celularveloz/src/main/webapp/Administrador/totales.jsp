@@ -71,7 +71,6 @@
                                     <tr>
                                         <th>Folio</th>
                                         <th>Fecha de Recepcion</th>
-                                        <th>Fecha de Entrega</th>
                                         <th>Total</th>
                                     </tr>
                                 </thead>
@@ -80,7 +79,6 @@
                                           <tr>
                                           <td><c:out value="${nota.folio}"/></td>
                                           <td><c:out value="${nota.fecharecepcion}"/></td>
-                                          <td><c:out value="${nota.fechaentrega}"/></td>
                                           <td><c:out value="${nota.total}"/></td>
                                           </tr>
                                             </c:forEach>

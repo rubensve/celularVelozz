@@ -21,14 +21,9 @@
     response.addHeader("Cache-Control", "no-cache");
     response.addHeader("Cache-Control", "no-store");
     response.setDateHeader("Expires", 0);
-    String fecha = (String)session.getAttribute("fechaentrega");
-    
     NotaDAO notas= new NotaDAO();
-    Nota nota= notas.leerultimo();
-    
-    if ( (fecha == null) || (fecha.equals("")) ) {
-      fecha = "";
-     }
+    Nota n= notas.leerultimo();
+    int folio= n.getFolio()+1;
     %>
 <html>
     <head>
@@ -93,8 +88,8 @@
                                             <div class="form-group">
                                             <label>Folio</label>
                                             <div class="col-md-11">
-                                            <input type="text" class="form-control" 
-                                                   placeholder="Folio Nota" name="folio" value="<%= nota.getFolio()+1 %>" readonly="true">
+                                                <input type="number" class="form-control" 
+                                                       placeholder="Folio Nota" name="folio" value="<%= folio %>" readonly="true">
                                             </div>
                                             </div>
                                     </div>
@@ -108,13 +103,13 @@
                                             </div>
                                     </div>
                                     <div class="col-md-4">
-                                            <div class="form-group">
-                                            <label>Fecha de Entrega:</label>  
+                                           <div class="form-group">
+                                            <label>Modelo</label>  
                                             <div class="col-md-11">
-                                            <input type="text" class="form-control" name="fechaentrega" id="entrega"
-                                              placeholder="yyyy-mm-dd" value="<%=fecha%>">  
-                                      </div>
-                                        </div>
+                                            <input type="text" class="form-control" name="modelo"
+                                              placeholder="Modelo" value="${sessionScope.modelo}">  
+                                            </div>
+                                            </div>
                                     </div>
                                 </div>
  <%-- ------------------------------------------------Segundo Renglon texto Le atendio, Cliente y Imei --%>                      
@@ -151,30 +146,15 @@
                                                      
                                     <div class="col-md-4">
                                             <div class="form-group">
-                                            <label>Modelo</label>  
-                                            <div class="col-md-11">
-                                            <input type="text" class="form-control" name="modelo"
-                                              placeholder="Modelo" value="${sessionScope.modelo}">  
-                                            </div>
-                                            </div>
-                                    </div>
-                                    
-                                </div>
-<%-- ------------------------------------------------Tercer Renglon texto Imei, Observaciones --%>                      
-                        <div class="row">
-                                <div class="col-md-4">
-                                            <div class="form-group">
                                             <label>IMEI</label>  
                                             <div class="col-md-11">
                                             <input type="text" class="form-control"
                                                    name="imei" placeholder="IMEI" value="${sessionScope.imei}" />  
                                             </div>
                                             </div>
+                                    </div>
+                                    
                                 </div>
-                                            
-                                
-                        </div>
-                                
 
 <%-- ------------------------------------------------Cuarto Renglon Cantidad, Descripcion, Precio --%>   
                                         
@@ -287,7 +267,7 @@
                                             </div>
                                             
                                         </div>         
-                            </form>
+</form>
                         </div>
                        
                     </div>

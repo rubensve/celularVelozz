@@ -77,7 +77,6 @@
                                         </div>
                                         
                                         <div class="col-md-4">
-                                            <p class="text-muted">Fecha de Entrega: </p><p class="text-success">${nota.fechaentrega}</p>
                                         </div>
                                         
                                         <div class="col-md-4">

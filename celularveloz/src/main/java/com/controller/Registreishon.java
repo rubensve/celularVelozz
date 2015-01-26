@@ -48,7 +48,6 @@ public class Registreishon extends HttpServlet {
             throws ServletException, IOException {
         double total = 0.0;
         String imei;
-        String fechaentrega;
         String modelo;
         String observacion;
         String mensaje;
@@ -80,13 +79,11 @@ public class Registreishon extends HttpServlet {
                 String descripcion = request.getParameter("descrip");
                 double precio = Double.parseDouble(request.getParameter("prec"));
                 imei = request.getParameter("imei");
-                fechaentrega = request.getParameter("fechaentrega");
                 int id_cliente= Integer.parseInt(request.getParameter("clientestodos"));
                 modelo= request.getParameter("modelo");
                 observacion= request.getParameter("observacioni");
                 Cliente cl= cliente.readi(id_cliente);
                 sesion.setAttribute("imei", imei);
-                sesion.setAttribute("fechaentrega", fechaentrega);
                 sesion.setAttribute("modelo", modelo);
                 sesion.setAttribute("observacion", observacion);
                 sesion.setAttribute("cl", cl);
@@ -107,9 +104,7 @@ public class Registreishon extends HttpServlet {
                     
             } else if (request.getParameter("Finalizar")!=null)
             {
-               int folio = Integer.parseInt(request.getParameter("folio"));
-               String fecharecepcion = request.getParameter("fecha");
-               fechaentrega = request.getParameter("fechaentrega");
+               int folioo= Integer.parseInt(request.getParameter("folio"));
                String login = u.getLogin();
                int id_cliente = Integer.parseInt(request.getParameter("clientestodos"));
                imei = request.getParameter("imei");
@@ -119,23 +114,21 @@ public class Registreishon extends HttpServlet {
                double totalv= Double.parseDouble(request.getParameter("total"));               
                validar=1;
              
-               nota.create(new Nota(fechaentrega, new Usuario(login), new Cliente(id_cliente), imei, modelo, 
+               nota.create(new Nota(new Usuario(login), new Cliente(id_cliente), imei, modelo, 
                        totalv, anticipo, (totalv-anticipo), observacion));
                
                
                 for (Articulo a : detallearticulos) 
                 {
-                    articulo.create(new Articulo(new Nota(folio), a.getCantidad(), a.getDescripcion(), a.getCosto()));
+                    articulo.create(new Articulo(new Nota(folioo), a.getCantidad(), a.getDescripcion(), a.getCosto()));
                 }
                 
                     detallearticulos.clear();
                     imei="";
-                    fechaentrega="";
                     modelo="";
                     mensaje= "Registro correcto, ahora puedes imprimir tu nota";
                     request.setAttribute("mensaje", mensaje);
                     sesion.setAttribute("imei", imei);
-                    sesion.setAttribute("fechaentrega", fechaentrega);
                     sesion.setAttribute("modelo", modelo);
                     sesion.setAttribute("validar", validar);
                     
@@ -151,7 +144,7 @@ public class Registreishon extends HttpServlet {
                 sesion.setAttribute("validar", validar);
 
                 try {
-                        Document documento = new Document(new Rectangle(164.4f,300),14,14,14,14);
+                        Document documento = new Document(new Rectangle(164.4f,500),14,14,14,14);
                         ByteArrayOutputStream baos = new ByteArrayOutputStream();
                         PdfWriter.getInstance(documento, baos);
                         // step 3

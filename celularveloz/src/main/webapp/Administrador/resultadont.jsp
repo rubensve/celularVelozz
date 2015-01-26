@@ -80,7 +80,7 @@
                                         </div>
                                         
                                         <div class="col-md-4">
-                                            <p class="text-muted">Fecha de Entrega: </p><p class="text-success">${anotas.fechaentrega}</p>
+                                            
                                         </div>
                                         
                                         <div class="col-md-4">

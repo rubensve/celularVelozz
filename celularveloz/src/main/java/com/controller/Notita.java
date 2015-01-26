@@ -36,17 +36,17 @@ public class Notita extends HttpServlet {
         try{
         String criterio = request.getParameter("criterio");
         NotaDAO notas= new NotaDAO();
-        Nota nota=null;
+        Nota nota;
         ClienteDAO clientes= new ClienteDAO();
-        Cliente cliente= null;
+        Cliente cliente;
         UsuarioDAO usuarios= new UsuarioDAO();
-        Usuario usuario=null;
+        Usuario usuario;
         ArticuloDAO articulo= new ArticuloDAO();
         ArrayList <Nota> anotas;
         CestatusNotaDAO cen= new CestatusNotaDAO();
-        CestatusNota cenn= null;
+        CestatusNota cenn;
         CestatusReparacionDAO cer= new CestatusReparacionDAO();
-        CestatusReparacion cerr= null;
+        CestatusReparacion cerr;
         String mensaje;
             if (criterio.equalsIgnoreCase("Folio")) 
             {

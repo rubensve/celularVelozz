@@ -4,7 +4,6 @@ public class Nota {
 
     private int folio;
     private String fecharecepcion;
-    private String fechaentrega;
     private Usuario u;
     private Cliente c;
     private String login;
@@ -26,10 +25,9 @@ public class Nota {
     private String observaciones;
     private String obsreparacion;
 
-    public Nota(int folio, String fecharecepcion, String fechaentrega, double total) {
+    public Nota(int folio, String fecharecepcion, double total) {
         this.folio = folio;
         this.fecharecepcion = fecharecepcion;
-        this.fechaentrega = fechaentrega;
         this.total = total;
     }
 
@@ -41,10 +39,9 @@ public class Nota {
         this.obsreparacion = obsreparacion;
     }
       
-    public Nota(int folio, String fecharecepcion, String fechaentrega, String nombreusuario, String apellidousuario, String nombrecliente, String apellidocliente, String telefono, String imei, String modelo, double total, double anticipo, String descripcionnota, String descripcionreparacion, String observaciones, String obsreparacion) {
+    public Nota(int folio, String fecharecepcion, String nombreusuario, String apellidousuario, String nombrecliente, String apellidocliente, String telefono, String imei, String modelo, double total, double anticipo, String descripcionnota, String descripcionreparacion, String observaciones, String obsreparacion) {
         this.folio = folio;
         this.fecharecepcion = fecharecepcion;
-        this.fechaentrega = fechaentrega;
         this.nombreusuario = nombreusuario;
         this.apellidousuario = apellidousuario;
         this.nombrecliente = nombrecliente;
@@ -64,10 +61,9 @@ public class Nota {
     {
     }
 
-    public Nota(int folio, String fecharecepcion, String fechaentrega, String login, int id_cliente, String imei, String modelo, double total, double anticipo, int id_estatusnota, int id_estatusreparacion, String observaciones, String obsreparacion) {
+    public Nota(int folio, String fecharecepcion, String login, int id_cliente, String imei, String modelo, double total, double anticipo, int id_estatusnota, int id_estatusreparacion, String observaciones, String obsreparacion) {
         this.folio = folio;
         this.fecharecepcion = fecharecepcion;
-        this.fechaentrega = fechaentrega;
         this.login = login;
         this.id_cliente = id_cliente;
         this.imei = imei;
@@ -88,11 +84,10 @@ public class Nota {
         this.folio = folio;
     }
 
-    public Nota(int folio, String fecharecepcion, String fechaentrega, Usuario u, Cliente c,String imei, double total, double anticipo, double resto,
+    public Nota(int folio, String fecharecepcion, Usuario u, Cliente c,String imei, double total, double anticipo, double resto,
             String observaciones, String modelo) {
         this.folio = folio;
         this.fecharecepcion = fecharecepcion;
-        this.fechaentrega = fechaentrega;
         this.u = u;
         this.c = c;
         this.imei= imei;
@@ -103,10 +98,21 @@ public class Nota {
         this.modelo= modelo;
     }
 
-    public Nota(String fechaentrega, Usuario u, Cliente c, String imei, String modelo, double total, double anticipo, double resto, String observaciones) {
-        this.fechaentrega = fechaentrega;
+    public Nota(Usuario u, Cliente c, String imei, String modelo, double total, double anticipo, double resto, String observaciones) {
         this.u = u;
         this.c = c;
+        this.imei = imei;
+        this.modelo = modelo;
+        this.total = total;
+        this.anticipo = anticipo;
+        this.resto = resto;
+        this.observaciones = observaciones;
+    }
+
+    public Nota(String fecharecepcion, String login, int id_cliente, String imei, String modelo, double total, double anticipo, double resto, String observaciones) {
+        this.fecharecepcion = fecharecepcion;
+        this.login = login;
+        this.id_cliente = id_cliente;
         this.imei = imei;
         this.modelo = modelo;
         this.total = total;
@@ -117,11 +123,11 @@ public class Nota {
     
     
     
+    
 
-    public Nota(int folio, String fecharecepcion, String fechaentrega, String login, int id_cliente, String imei, String modelo, double total, double anticipo, double resto, int id_estatusnota, int id_estatusreparacion, String observaciones, String obsreparacion) {
+    public Nota(int folio, String fecharecepcion, String login, int id_cliente, String imei, String modelo, double total, double anticipo, double resto, int id_estatusnota, int id_estatusreparacion, String observaciones, String obsreparacion) {
         this.folio = folio;
         this.fecharecepcion = fecharecepcion;
-        this.fechaentrega = fechaentrega;
         this.login = login;
         this.id_cliente = id_cliente;
         this.imei = imei;
@@ -135,10 +141,9 @@ public class Nota {
         this.obsreparacion = obsreparacion;
     }
     
-    public Nota(int folio, String fecharecepcion, String fechaentrega, String login, int id_cliente, String imei, String modelo, double total, double anticipo, String descripcionnota, String descripcionreparacion, String observaciones, String obsreparacion) {
+    public Nota(int folio, String fecharecepcion, String login, int id_cliente, String imei, String modelo, double total, double anticipo, String descripcionnota, String descripcionreparacion, String observaciones, String obsreparacion) {
         this.folio = folio;
         this.fecharecepcion = fecharecepcion;
-        this.fechaentrega = fechaentrega;
         this.login = login;
         this.id_cliente = id_cliente;
         this.imei = imei;
@@ -152,10 +157,9 @@ public class Nota {
     }
     
 
-    public Nota(int folio, String fecharecepcion, String fechaentrega, Usuario u, Cliente c, String imei, double total, double anticipo, double resto, int id_estatusnota, int id_estatusreparacion, String observaciones, String obsreparacion) {
+    public Nota(int folio, String fecharecepcion, Usuario u, Cliente c, String imei, double total, double anticipo, double resto, int id_estatusnota, int id_estatusreparacion, String observaciones, String obsreparacion) {
         this.folio = folio;
         this.fecharecepcion = fecharecepcion;
-        this.fechaentrega = fechaentrega;
         this.u = u;
         this.c = c;
         this.imei = imei;
@@ -182,14 +186,6 @@ public class Nota {
 
     public void setFecharecepcion(String fecharecepcion) {
         this.fecharecepcion = fecharecepcion;
-    }
-
-    public String getFechaentrega() {
-        return fechaentrega;
-    }
-
-    public void setFechaentrega(String fechaentrega) {
-        this.fechaentrega = fechaentrega;
     }
 
     public Usuario getU() {

@@ -28,7 +28,7 @@ public class pruebaclientenombre {
     public static void main(String[] args) {
       
         NotaDAO notas= new NotaDAO();
-        Nota n= notas.leerIndividual(6);
+        Nota n= notas.leerultimo();
         UsuarioDAO usuario= new UsuarioDAO();
         Usuario usu= usuario.login(n.getLogin());
         ClienteDAO clientes= new ClienteDAO();
@@ -41,9 +41,9 @@ public class pruebaclientenombre {
         CestatusReparacion cerr= cer.busquedas(n.getId_estatusreparacion());
         
         
-        System.out.println("Folio: "+ n.getFolio());
+        System.out.println("Folio: "+ n.getFolio()+1);
         System.out.println("Fecha Recepcion: "+ n.getFecharecepcion());
-        System.out.println("Fecha Entrega: "+ n.getFechaentrega() );
+        //System.out.println("Fecha Entrega: "+ n.getFechaentrega() );
         System.out.println("Vendedor: "+ usu.getNombre() + " " + usu.getApellido());
         System.out.println("Cliente: " + cliente.getNombre() + " " + cliente.getApellido() + " "+ cliente.getTelefono());
         System.out.println("Dispositivo: " + n.getModelo()+ " " + n.getImei());

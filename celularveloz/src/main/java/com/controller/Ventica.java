@@ -32,10 +32,11 @@ public class Ventica extends HttpServlet {
     ArrayList<Cliente> clientes;
     ClienteDAO cliente= new ClienteDAO();
     clientes= cliente.readAll();
-    NotaDAO notas = new NotaDAO();
-    Nota nota = notas.leerultimo();
-    
-    session.setAttribute("nota", nota);
+    //NotaDAO notas = new NotaDAO();
+    //Nota nota = notas.leerultimo();
+    //int folio= nota.getFolio() + 1;
+    //session.setAttribute("folio", folio);
+    //session.setAttribute("nota", nota);
     session.setAttribute("clientes", clientes);
     response.sendRedirect("ventas.jsp");
     }
